@@ -13,7 +13,7 @@ import com.capgemaxi.util.Utilidades;
 
 /**
  * Servicio que pasandole como parametro una List<Strings> que seran nombres de cartas
- * para todas las cartas que encuentre en la llamada al webservice calculara su precio
+ * para todas las cartas que encuentre  en la llamada al webservice calculara su precio
  * @return listadoConPrecio
  * @author Saul Blanco
  *
