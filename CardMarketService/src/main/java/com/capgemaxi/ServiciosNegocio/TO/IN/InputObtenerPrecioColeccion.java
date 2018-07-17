@@ -1,4 +1,4 @@
-package com.capgemaxi.ServicioNegocio.TO;
+package com.capgemaxi.ServiciosNegocio.TO.IN;
 
 import java.util.List;
 
