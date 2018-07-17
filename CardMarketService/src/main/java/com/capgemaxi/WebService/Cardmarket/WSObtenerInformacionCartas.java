@@ -1,8 +1,8 @@
 package com.capgemaxi.WebService.Cardmarket;
 
-import com.capgemaxi.WebService.Cardmarket.Arquitectura.ConnectionProperties;
+import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceProperties;
 
-public class WSObtenerInformacionCartas extends ConnectionProperties{
+public class WSObtenerInformacionCartas {
 
 	/**
 	 * devuelve el precio Minimo de una carta, si hay varias expansiones coge el mas bajo
@@ -11,8 +11,8 @@ public class WSObtenerInformacionCartas extends ConnectionProperties{
 	 * @return
 	 */
 
-	public Number obtenerPrecioMinimoCarta(String carta, int idioma) {
-		return idioma;
+	public static Double obtenerPrecioMinimoCarta(String carta, int juego, int idioma) {
+		return 0.0;
 
 	}
 

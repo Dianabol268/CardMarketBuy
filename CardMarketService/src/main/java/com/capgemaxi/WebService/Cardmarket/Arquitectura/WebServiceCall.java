@@ -29,10 +29,10 @@ public class WebServiceCall {
 
         */
        public WebServiceCall() {
-           mkmAppToken = ConnectionProperties.mkmAppToken;
-           mkmAppSecret = ConnectionProperties.mkmAppSecret;
-           mkmAccessToken = ConnectionProperties.mkmAccessToken;
-           mkmAccessTokenSecret = ConnectionProperties.mkmAccessTokenSecret;
+           mkmAppToken = WebServiceProperties.mkmAppToken;
+           mkmAppSecret = WebServiceProperties.mkmAppSecret;
+           mkmAccessToken = WebServiceProperties.mkmAccessToken;
+           mkmAccessTokenSecret = WebServiceProperties.mkmAccessTokenSecret;
 
            lastError = null;
            debug = false;
