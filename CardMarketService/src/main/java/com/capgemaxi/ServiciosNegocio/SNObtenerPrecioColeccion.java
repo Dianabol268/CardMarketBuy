@@ -22,6 +22,7 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 
 	@Override
 	public OutputServicioNegocio llamadaServicio() {
+
 		log.info("Inicio- SNObtenerPrecioColeccion");
 		//primero inicializamos el objeto de entrada de arquitectura, con el cast Necesario
 		InputObtenerPrecioColeccion entrada = (InputObtenerPrecioColeccion) this.getEntradaServicio();
@@ -38,11 +39,13 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 			if(!Utilidades.isZero(precio)) {
 				cartaEncontradas.add(nombreCarta);
 				precioAcumulado = Double.sum(precioAcumulado, precio);
+				log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ nombreCarta + " - " + precio + " euros");
 			}
 			else {
 				cartaNoEncontradas.add(nombreCarta);
 			}
 		}
+		log.info("In- SNObtenerPrecioColeccion- PrecioTotal  " + precioAcumulado + " euros");
 
 		OutputObtenerPrecioColeccion salida= new OutputObtenerPrecioColeccion();
 		salida.setListadoCartasEncontradas(cartaEncontradas);

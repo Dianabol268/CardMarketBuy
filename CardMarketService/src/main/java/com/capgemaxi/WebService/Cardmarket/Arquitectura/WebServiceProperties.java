@@ -8,4 +8,7 @@ public class WebServiceProperties {
 	public static final String mkmAccessTokenSecret = "G9IUsEXVUZshO8hqqdIJfocZ0dGd3bLp" ;
 
 	public static final int ID_JUEGO_MAGIC = 1;
+
+
+	public static final int ID_IDIOMA_INGLES = 1;
 }
