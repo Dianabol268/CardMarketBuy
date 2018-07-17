@@ -19,7 +19,7 @@ public abstract class ServicioNegocio {
      *
      * @return resultado de salida (un objeto TO.OUT)
      */
-	protected abstract Object llamadaServicio();
+	protected abstract OutputServicioNegocio llamadaServicio();
 
 	/**
 	 * Metodo generico al que SIEMPRE hay que llamar para invocar un servicio
@@ -31,9 +31,9 @@ public abstract class ServicioNegocio {
 		this.setEntradaServicio(entradaServicioObj);
 
 		//hacemos la llamada al metodo implementado por cada clase hija
-		Object salida=null;
+		OutputServicioNegocio salida=null;
 		try {
-			salida= llamadaServicio();
+			 salida= llamadaServicio();
 		}
 		catch(Exception error) {
 			log.log(Level.SEVERE, "Se ha producido un error en la invocacion del servicio Id: " +
@@ -45,7 +45,7 @@ public abstract class ServicioNegocio {
 			//TODO rollback base de datos
 		}
 
-		return null;
+		return salida;
 
 	}
 

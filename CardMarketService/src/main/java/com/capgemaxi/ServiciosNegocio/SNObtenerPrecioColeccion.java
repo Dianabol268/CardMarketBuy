@@ -1,5 +1,6 @@
 package com.capgemaxi.ServiciosNegocio;
 
+import com.capgemaxi.ServiciosNegocio.Arquitectura.OutputServicioNegocio;
 import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaxi.ServiciosNegocio.TO.IN.InputObtenerPrecioColeccion;
 
@@ -14,7 +15,7 @@ import com.capgemaxi.ServiciosNegocio.TO.IN.InputObtenerPrecioColeccion;
 public class SNObtenerPrecioColeccion extends ServicioNegocio{
 
 	@Override
-	public Object llamadaServicio() {
+	public OutputServicioNegocio llamadaServicio() {
 		log.info("Inicio- SNObtenerPrecioColeccion");
 		//primero inicializamos el objeto de entrada de arquitectura, con el cast Necesario
 		InputObtenerPrecioColeccion entrada = (InputObtenerPrecioColeccion) this.getEntradaServicio();
