@@ -1,0 +1,53 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="product" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:int" name="idProduct"/>
+              <xs:element type="xs:short" name="idMetaproduct"/>
+              <xs:element type="xs:byte" name="idGame"/>
+              <xs:element type="xs:string" name="countReprints"/>
+              <xs:element name="name" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="idLanguage"/>
+                    <xs:element type="xs:string" name="languageName"/>
+                    <xs:element type="xs:string" name="productName"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="website"/>
+              <xs:element type="xs:string" name="image"/>
+              <xs:element name="category">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:byte" name="idCategory"/>
+                    <xs:element type="xs:string" name="categoryName"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="priceGuide">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:float" name="SELL"/>
+                    <xs:element type="xs:float" name="LOW"/>
+                    <xs:element type="xs:float" name="LOWEX"/>
+                    <xs:element type="xs:float" name="LOWFOIL"/>
+                    <xs:element type="xs:float" name="AVG"/>
+                    <xs:element type="xs:float" name="TREND"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="expansion"/>
+              <xs:element type="xs:short" name="expIcon"/>
+              <xs:element type="xs:string" name="number" minOccurs="0"/>
+              <xs:element type="xs:string" name="rarity" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

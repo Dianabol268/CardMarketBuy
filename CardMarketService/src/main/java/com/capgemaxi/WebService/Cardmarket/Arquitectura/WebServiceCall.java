@@ -21,7 +21,7 @@ public class WebServiceCall {
 
        private Throwable lastError;
        private int lastCode;
-       private String lastContent;
+       private StringBuffer lastContent;
        private boolean debug;
 
        /**
@@ -48,7 +48,7 @@ public class WebServiceCall {
        public boolean requestCard(String requestURL) {
            lastError = null;
            lastCode = 0;
-           lastContent = "";
+           lastContent = new StringBuffer();
            try {
 
                _debug("Requesting "+requestURL);
@@ -117,7 +117,7 @@ public class WebServiceCall {
                        sb.append(line);
                    }
                    rd.close();
-                   lastContent = sb.toString();
+                   lastContent = sb;
                    _debug("Response Content is \n"+lastContent);
                }
 
@@ -178,7 +178,7 @@ public class WebServiceCall {
         * Get response content from last request.
         * @return
         */
-       public String responseContent() {
+       public StringBuffer responseContent() {
            return lastContent;
        }
 
