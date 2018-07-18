@@ -27,7 +27,7 @@ public final class Utilidades {
 		}
 //		JAXBContext jaxbContext = JAXBContext.newInstance(objeto.getClass());
 //		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//		Customer customer = (Customer) jaxbUnmarshaller.unmarshal(new File("C:\\file.xml"));
+//		Customer customer = (Customer) jaxbUnmarshaller.unmarshal(new File("C:\\file.xml"));a
 		return objeto;
 	}
 }
