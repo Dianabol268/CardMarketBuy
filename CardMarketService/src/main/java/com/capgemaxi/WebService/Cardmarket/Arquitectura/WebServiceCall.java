@@ -12,6 +12,11 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+/**
+ * Clase que gestiona todas las llamadas a el webService de negocio de MKM 
+ * @author Astur
+ *
+ */
 public class WebServiceCall {
 
        private String mkmAppToken;

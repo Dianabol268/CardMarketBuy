@@ -12,24 +12,37 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import com.capgemaxi.WebService.Cardmarket.WSObtenerInformacionCartas;
 
-import com.sun.media.jfxmedia.logging.Logger;
 
 public final class Utilidades {
-
+	public static final Logger log = Logger.getLogger(Utilidades.class.getName());
+	
 	/**
-	 * metodo que devuelve true si el Double que nos pasan es nulo o 0
+	 * metodo que devuelve true si el numero que nos pasan es nulo o 0
 	 * @param precio
 	 * @return
 	 */
 	public static boolean isZero(Number precio) {
-		if(precio!=null && precio.floatValue()!=0) {
-			return true;
+		if(precio!=null && precio.floatValue()!=0.0F) {
+			return false;
 		}
-		return false;
+		return true;
 	}
-
-
+	
+	/**
+	 * Metodo que comprueba si un objeto es nulo 
+	 * @param objeto
+	 * @return
+	 */
+	public static boolean isNull(Object objeto) {
+		if(objeto!=null) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 *Metodo que te rellena un Objeto
@@ -43,8 +56,9 @@ public final class Utilidades {
 				   Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 				   objeto = (Object) jaxbUnmarshaller.unmarshal(new StringReader(stringBuffer.toString()));
 				   //no deberia darse
-			} catch (JAXBException e) {
-				System.out.println("ERROR");
+			} catch (JAXBException error) {
+				log.log(Level.SEVERE, "Error haciendo el Unmarshall del xml: Detalles del error: "+ error.getMessage() +
+						"////Causa: " + error.getCause());
 			}
 		}
 		return objeto;

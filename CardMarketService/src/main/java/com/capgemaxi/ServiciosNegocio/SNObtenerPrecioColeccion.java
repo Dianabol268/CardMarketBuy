@@ -2,6 +2,7 @@ package com.capgemaxi.ServiciosNegocio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.capgemaxi.ServiciosNegocio.Arquitectura.OutputServicioNegocio;
 import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
@@ -28,21 +29,26 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 		InputObtenerPrecioColeccion entrada = (InputObtenerPrecioColeccion) this.getEntradaServicio();
 		int juego= entrada.getIdJuego();
 		int idioma= entrada.getIdioma();
+
 		//creamos las listas que tendremos que devolver
 		List<String> cartaEncontradas = new ArrayList<String>();
 		List<String> cartaNoEncontradas = new ArrayList<String>();
 		Double precioAcumulado= new Double(0);
 
-		for(String nombreCarta :entrada.getListadoNombresCartas()) {
-			Float precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombreCarta, juego, idioma);
+		for(Map<String, Object> carta :entrada.getListadoCartas()) {
+			
+			String expansion=(String) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION);
+			String nombre =  (String) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE);
+			boolean foil = (boolean) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL);
+			Float precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombre, juego, idioma, expansion, foil);
 			//si el servicio nos devuelve precio 0 es que no ha encontrado la carta
 			if(!Utilidades.isZero(precio)) {
-				cartaEncontradas.add(nombreCarta);
+				cartaEncontradas.add(nombre);
 				precioAcumulado = Double.sum(precioAcumulado, precio);
-				log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ nombreCarta + " - " + precio + " euros");
+				log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ nombre + " - " + precio + " euros");
 			}
 			else {
-				cartaNoEncontradas.add(nombreCarta);
+				cartaNoEncontradas.add(nombre);
 			}
 		}
 		log.info("In- SNObtenerPrecioColeccion- PrecioTotal  " + precioAcumulado + " euros");

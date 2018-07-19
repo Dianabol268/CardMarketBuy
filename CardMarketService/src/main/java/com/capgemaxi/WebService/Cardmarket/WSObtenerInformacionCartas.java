@@ -1,12 +1,17 @@
 package com.capgemaxi.WebService.Cardmarket;
 
+import java.util.logging.Logger;
+
+import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceCall;
 import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceProperties;
 import com.capgemaxi.WebService.Cardmarket.pojo.Response;
+import com.capgemaxi.WebService.Cardmarket.pojo.Response.Product;
 import com.capgemaxi.util.Utilidades;
 
 public class WSObtenerInformacionCartas {
-
+	
+	
 	/**
 	 * devuelve el precio Minimo de una carta, si hay varias expansiones coge el mas bajo
 	 * @param carta
@@ -14,7 +19,7 @@ public class WSObtenerInformacionCartas {
 	 * @return
 	 */
 
-	public static float obtenerPrecioMinimoCarta(String carta, int juego, int idioma) {
+	public static Float obtenerPrecioMinimoCarta(String carta, int juego, int idioma, String expansion, boolean foil) {
 
 		 WebServiceCall app = new WebServiceCall();
 		 StringBuilder str = new StringBuilder();
@@ -30,10 +35,27 @@ public class WSObtenerInformacionCartas {
 		  if (app.requestCard(str.toString())) { //  game  lenguaje isexact
 			  Response salidaWebService = new Response();
 			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService);
-			  return salidaWebService.getProduct().get(0).getPriceGuide().getLOW();
+			  
+			  //por cada producto, buscamos la de la expansion que nos han pasado
+		
+			  for(Product producto: salidaWebService.getProduct()) {
+				  if(!Utilidades.isNull(producto)) {
+					  //si coincide la expansion...
+					  if(expansion.toLowerCase().equals(producto.getExpansion().toLowerCase())) {
+						  if(foil) {
+							  return producto.getPriceGuide().getLOWFOIL();
+						  }
+						  else {
+							  return producto.getPriceGuide().getLOW(); 
+							   
+						  }
+					  }
+				  }
+			  }
+	 
           }
 
-		return 0.0F;
+		return null;
 
 	}
 

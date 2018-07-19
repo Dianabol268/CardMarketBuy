@@ -1,28 +1,33 @@
 package com.capgemaxi.ServiciosNegocio.TO.IN;
 
 import java.util.List;
+import java.util.Map;
 
 import com.capgemaxi.ServiciosNegocio.Arquitectura.InputServicioNegocio;
 
 public class InputObtenerPrecioColeccion extends InputServicioNegocio{
 
+	public static final String LISTADO_CARTAS_NOMBRE= "NOMBRECARTA";
+	public static final String LISTADO_CARTAS_EXPANSION= "EXPANSION";
+	public static final String LISTADO_CARTAS_FOIL= "FOIL";
 
-
-	private List<String> listadoNombresCartas;
+	private List<Map<String, Object>> listadoCartas;
 	private int idJuego;
 	private int idioma;
+	private String expansion;
+
 	
 	@Override
 	public void setDescriptor() {
 		this.descriptor="Objeto que encapsula la Informacion de entrada al servicio de Negocio SNObtenerPrecioColeccion";		
 	}
 	
-	public List<String> getListadoNombresCartas() {
-		return listadoNombresCartas;
+	public List<Map<String, Object>> getListadoCartas() {
+		return listadoCartas;
 	}
 
-	public void setListadoNombresCartas(List<String> listadoNombresCartas) {
-		this.listadoNombresCartas = listadoNombresCartas;
+	public void setListadoCartas(List<Map<String, Object>> listadoNombresCartas) {
+		this.listadoCartas = listadoNombresCartas;
 	}
 
 	public int getIdJuego() {

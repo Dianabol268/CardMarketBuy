@@ -6,27 +6,31 @@
   <name>CardMarketService</name>
   <description>CardMarketService</description>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-   </dependencies>
+   <properties>
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
    
    <build>
-<plugins>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.2</version> <!-- or whatever current version -->
-    <configuration>
-      <source>1.8</source>
-      <target>1.8</target>
-    </configuration>
-  </plugin>
-</plugins>
-</build>
-
+	<plugins>
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+	    <version>3.2</version> <!-- or whatever current version -->
+	    <configuration>
+	      <source>1.8</source>
+	      <target>1.8</target>
+	    </configuration>
+	  </plugin>
+	</plugins>
+	</build>
+	
 </project>
