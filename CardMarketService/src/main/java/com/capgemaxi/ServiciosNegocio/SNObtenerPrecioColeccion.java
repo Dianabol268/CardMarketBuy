@@ -34,7 +34,7 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 		Double precioAcumulado= new Double(0);
 
 		for(String nombreCarta :entrada.getListadoNombresCartas()) {
-			Double precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombreCarta, juego, idioma);
+			Float precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombreCarta, juego, idioma);
 			//si el servicio nos devuelve precio 0 es que no ha encontrado la carta
 			if(!Utilidades.isZero(precio)) {
 				cartaEncontradas.add(nombreCarta);

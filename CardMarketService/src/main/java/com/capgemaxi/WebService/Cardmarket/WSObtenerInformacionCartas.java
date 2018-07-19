@@ -2,6 +2,8 @@ package com.capgemaxi.WebService.Cardmarket;
 
 import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceCall;
 import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceProperties;
+import com.capgemaxi.WebService.Cardmarket.pojo.Response;
+import com.capgemaxi.util.Utilidades;
 
 public class WSObtenerInformacionCartas {
 
@@ -12,7 +14,7 @@ public class WSObtenerInformacionCartas {
 	 * @return
 	 */
 
-	public static Double obtenerPrecioMinimoCarta(String carta, int juego, int idioma) {
+	public static float obtenerPrecioMinimoCarta(String carta, int juego, int idioma) {
 
 		 WebServiceCall app = new WebServiceCall();
 		 StringBuilder str = new StringBuilder();
@@ -26,10 +28,12 @@ public class WSObtenerInformacionCartas {
 		 str.append("false");
 
 		  if (app.requestCard(str.toString())) { //  game  lenguaje isexact
-       	   System.out.println(app.responseContent());
+			  Response salidaWebService = new Response();
+			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService);
+			  return salidaWebService.getProduct().get(0).getPriceGuide().getLOW();
           }
 
-		return 0.0;
+		return 0.0F;
 
 	}
 
