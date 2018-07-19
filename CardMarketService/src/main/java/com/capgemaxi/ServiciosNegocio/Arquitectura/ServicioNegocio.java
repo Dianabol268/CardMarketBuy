@@ -26,7 +26,7 @@ public abstract class ServicioNegocio {
 	 * @param entradaServicio
 	 * @return salidaServicio
 	 */
-	public final OutputServicioNegocio llamadaServicio(Object entradaServicioObj) {
+	public final OutputServicioNegocio llamadaServicio(InputServicioNegocio entradaServicioObj) {
 		//seteamos la entrada, para que sea visible en las clases hijas a traves del campo
 		this.setEntradaServicio(entradaServicioObj);
 
