@@ -10,10 +10,11 @@ import com.capgemaxi.WebService.Cardmarket.pojo.Response.Product;
 import com.capgemaxi.util.Utilidades;
 
 public class WSObtenerInformacionCartas {
-	
-	
+
+	public static final Logger log = Logger.getLogger(WSObtenerInformacionCartas.class.getName());
 	/**
-	 * devuelve el precio Minimo de una carta, si hay varias expansiones coge el mas bajo
+	 * devuelve el precio Minimo de una carta, de la expansion indicada, el nombre de la carta viene en el idioma indicado
+	 * diferencia entre foiol y no foil
 	 * @param carta
 	 * @param idioma
 	 * @return
@@ -35,28 +36,72 @@ public class WSObtenerInformacionCartas {
 		  if (app.requestCard(str.toString())) { //  game  lenguaje isexact
 			  Response salidaWebService = new Response();
 			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService);
-			  
+
 			  //por cada producto, buscamos la de la expansion que nos han pasado
-		
+
 			  for(Product producto: salidaWebService.getProduct()) {
 				  if(!Utilidades.isNull(producto)) {
 					  //si coincide la expansion...
 					  if(expansion.toLowerCase().equals(producto.getExpansion().toLowerCase())) {
 						  if(foil) {
+							  log.info("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
+									  + producto.getPriceGuide().getLOWFOIL() + " euros");
 							  return producto.getPriceGuide().getLOWFOIL();
 						  }
 						  else {
-							  return producto.getPriceGuide().getLOW(); 
-							   
+							  log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
+									  + producto.getPriceGuide().getLOW() + " euros");
+							  return producto.getPriceGuide().getLOW();
+
 						  }
 					  }
 				  }
 			  }
-	 
+
           }
 
-		return null;
+		return new Float(0F);
 
+	}
+
+	/**
+	 * devuelve el precio Minimo de una carta,por el ID. tambien diferencia entre foil y no foil
+	 * @param carta
+	 * @param idioma
+	 * @return
+	 */
+
+	public static Float obtenerPrecioMinimoCarta(Integer id, boolean foil) {
+		 WebServiceCall app = new WebServiceCall();
+		 StringBuilder str = new StringBuilder();
+		 str.append("https://www.mkmapi.eu/ws/v1.1/product/");
+		 str.append(id);
+
+		  if (app.requestCard(str.toString())) {
+			  Response salidaWebService = new Response();
+			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService);
+
+			  //solo deberia venir 1 producto
+			  for(Product producto: salidaWebService.getProduct()) {
+				  if(!Utilidades.isNull(producto)) {
+					  //si coincide la expansion...
+						  if(foil) {
+							  log.info("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
+									  + producto.getPriceGuide().getLOWFOIL() + " euros");
+							  return producto.getPriceGuide().getLOWFOIL();
+						  }
+						  else {
+							  log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
+									  + producto.getPriceGuide().getLOW() + " euros");
+							  return producto.getPriceGuide().getLOW();
+
+						  }
+
+				  }
+			  }
+
+          }
+		  return new Float(0F);
 	}
 
 }

@@ -22,6 +22,11 @@ import com.capgemaxi.util.Utilidades;
 public class SNObtenerPrecioColeccion extends ServicioNegocio{
 
 	@Override
+	/**
+	 * Servicio retorna el precio Mínimo de una colecion, cada carta puede venir indicada por su ID, que sera
+	 * lo primero que se usara, en caso contrario se buscara su nombre y expansion dentro del TO de entrada.
+	 *
+	 */
 	public OutputServicioNegocio llamadaServicio() {
 
 		log.info("Inicio- SNObtenerPrecioColeccion");
@@ -36,32 +41,43 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 		Double precioAcumulado= new Double(0);
 
 		for(Map<String, Object> carta :entrada.getListadoCartas()) {
-			
+			Integer id = (Integer) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_ID);
 			String expansion=(String) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION);
 			String nombre =  (String) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE);
 			boolean foil = (boolean) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL);
-			Float precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombre, juego, idioma, expansion, foil);
+
+			//si trae Id buscamos por el, en caso contrario por nombre
+			Float precio=new Float(0F);
+			if(!Utilidades.isNull(id)) {
+				precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(id, foil);
+			}
+
+			else if(!Utilidades.isNull(nombre)){
+				 precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombre, juego, idioma, expansion, foil);
+			}
+
 			//si el servicio nos devuelve precio 0 es que no ha encontrado la carta
 			if(!Utilidades.isZero(precio)) {
 				cartaEncontradas.add(nombre);
 				precioAcumulado = Double.sum(precioAcumulado, precio);
-				log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ nombre + " - " + precio + " euros");
 			}
 			else {
 				cartaNoEncontradas.add(nombre);
 			}
 		}
+
 		log.info("In- SNObtenerPrecioColeccion- PrecioTotal  " + precioAcumulado + " euros");
 
 		OutputObtenerPrecioColeccion salida= new OutputObtenerPrecioColeccion();
 		salida.setListadoCartasEncontradas(cartaEncontradas);
 		salida.setListadoCartasNoEncontradas(cartaNoEncontradas);
 		salida.setPrecioColeccion(precioAcumulado);
-
-		log.info("Inicio- SNObtenerPrecioColeccion");
+		log.info("Final- SNObtenerPrecioColeccion");
 		return salida;
 
 	}
+
+
 
 	@Override
 	protected void setIdServicio(int IdServicio) {

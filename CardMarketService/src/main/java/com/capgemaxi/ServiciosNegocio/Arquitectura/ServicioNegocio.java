@@ -42,7 +42,9 @@ public abstract class ServicioNegocio {
 			log.log(Level.SEVERE, "Detalles del error: "+ error.getMessage() +
 					"////Causa: " + error.getCause());
 
-			//TODO rollback base de datos
+			//TODO rollback base de datos y devolver error
+
+
 		}
 
 		return salida;

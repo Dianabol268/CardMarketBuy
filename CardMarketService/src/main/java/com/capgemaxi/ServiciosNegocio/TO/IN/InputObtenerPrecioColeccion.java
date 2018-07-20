@@ -7,6 +7,7 @@ import com.capgemaxi.ServiciosNegocio.Arquitectura.InputServicioNegocio;
 
 public class InputObtenerPrecioColeccion extends InputServicioNegocio{
 
+	public static final String LISTADO_CARTAS_ID= "ID";
 	public static final String LISTADO_CARTAS_NOMBRE= "NOMBRECARTA";
 	public static final String LISTADO_CARTAS_EXPANSION= "EXPANSION";
 	public static final String LISTADO_CARTAS_FOIL= "FOIL";
@@ -14,14 +15,13 @@ public class InputObtenerPrecioColeccion extends InputServicioNegocio{
 	private List<Map<String, Object>> listadoCartas;
 	private int idJuego;
 	private int idioma;
-	private String expansion;
 
-	
+
 	@Override
 	public void setDescriptor() {
-		this.descriptor="Objeto que encapsula la Informacion de entrada al servicio de Negocio SNObtenerPrecioColeccion";		
+		this.descriptor="Objeto que encapsula la Informacion de entrada al servicio de Negocio SNObtenerPrecioColeccion";
 	}
-	
+
 	public List<Map<String, Object>> getListadoCartas() {
 		return listadoCartas;
 	}
