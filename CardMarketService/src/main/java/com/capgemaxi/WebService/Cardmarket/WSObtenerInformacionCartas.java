@@ -1,18 +1,14 @@
 package com.capgemaxi.WebService.Cardmarket;
 
-import java.util.logging.Logger;
 
-import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceCall;
-import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceProperties;
 import com.capgemaxi.WebService.Cardmarket.pojo.Response;
 import com.capgemaxi.WebService.Cardmarket.pojo.Response.Product;
 import com.capgemaxi.util.Utilidades;
 
 public class WSObtenerInformacionCartas {
 
-	public static final Logger log = Logger.getLogger(WSObtenerInformacionCartas.class.getName());
-	/**
+		/**
 	 * devuelve el precio Minimo de una carta, de la expansion indicada, el nombre de la carta viene en el idioma indicado
 	 * diferencia entre foiol y no foil
 	 * @param carta
