@@ -1,7 +1,10 @@
 package com.capgemaxi.ServiciosNegocio.Arquitectura;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 //implementamos una llamada gen�rica para todos los Servicios
 	//cada Servicio de negocio tiene que tener un objeto de entrada propio. o usar uno generico
@@ -11,6 +14,7 @@ public abstract class ServicioNegocio {
 
 	public int idServicio;
 	public Object entradaServicio;
+	FileHandler fh;
 
 	public static final Logger log = Logger.getLogger(ServicioNegocio.class.getName());
 
@@ -27,6 +31,15 @@ public abstract class ServicioNegocio {
 	 * @return salidaServicio
 	 */
 	public final OutputServicioNegocio llamadaServicio(InputServicioNegocio entradaServicioObj) {
+		//logs
+		try {
+			fh = new FileHandler("logsServicio.log");
+			//no deberia darse
+		} catch (Exception e) {
+		}
+        log.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();
+        fh.setFormatter(formatter);
 		//seteamos la entrada, para que sea visible en las clases hijas a traves del campo
 		this.setEntradaServicio(entradaServicioObj);
 
