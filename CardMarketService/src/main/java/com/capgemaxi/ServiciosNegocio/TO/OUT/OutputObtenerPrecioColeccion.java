@@ -3,6 +3,7 @@ package com.capgemaxi.ServiciosNegocio.TO.OUT;
 import java.util.List;
 
 import com.capgemaxi.ServiciosNegocio.Arquitectura.OutputServicioNegocio;
+import com.capgemaxi.WebService.Cardmarket.pojo.Response.Product;
 
 public class OutputObtenerPrecioColeccion extends OutputServicioNegocio{
 
@@ -10,7 +11,7 @@ public class OutputObtenerPrecioColeccion extends OutputServicioNegocio{
 
 	private Number precioColeccion;
 
-	private List<String> listadoCartasEncontradas;
+	private List<Product> listadoCartasEncontradas;
 
 	private List<String> listadoCartasNoEncontradas;
 
@@ -22,11 +23,11 @@ public class OutputObtenerPrecioColeccion extends OutputServicioNegocio{
 		this.precioColeccion = precioColeccion;
 	}
 
-	public List<String> getListadoCartasEncontradas() {
+	public List<Product> getListadoCartasEncontradas() {
 		return listadoCartasEncontradas;
 	}
 
-	public void setListadoCartasEncontradas(List<String> listadoCartasEncontradas) {
+	public void setListadoCartasEncontradas(List<Product> listadoCartasEncontradas) {
 		this.listadoCartasEncontradas = listadoCartasEncontradas;
 	}
 

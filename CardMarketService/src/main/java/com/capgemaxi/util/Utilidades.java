@@ -2,6 +2,7 @@ package com.capgemaxi.util;
 
 import java.io.File;
 import java.io.StringReader;
+import java.math.BigDecimal;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -19,7 +20,7 @@ import com.capgemaxi.WebService.Cardmarket.WSObtenerInformacionCartas;
 
 public final class Utilidades {
 	public static final Logger log = Logger.getLogger(Utilidades.class.getName());
-	
+
 	/**
 	 * metodo que devuelve true si el numero que nos pasan es nulo o 0
 	 * @param precio
@@ -31,9 +32,9 @@ public final class Utilidades {
 		}
 		return true;
 	}
-	
+
 	/**
-	 * Metodo que comprueba si un objeto es nulo 
+	 * Metodo que comprueba si un objeto es nulo
 	 * @param objeto
 	 * @return
 	 */
@@ -64,6 +65,17 @@ public final class Utilidades {
 		return objeto;
 	}
 
-
+	/**
+     * Round to certain number of decimals
+     *
+     * @param d
+     * @param decimalPlace
+     * @return
+     */
+    public static Float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
 
 }

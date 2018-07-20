@@ -9,6 +9,7 @@ import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaxi.ServiciosNegocio.TO.IN.InputObtenerPrecioColeccion;
 import com.capgemaxi.ServiciosNegocio.TO.OUT.OutputObtenerPrecioColeccion;
 import com.capgemaxi.WebService.Cardmarket.WSObtenerInformacionCartas;
+import com.capgemaxi.WebService.Cardmarket.pojo.Response.Product;
 import com.capgemaxi.util.Utilidades;
 
 
@@ -36,7 +37,7 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 		int idioma= entrada.getIdioma();
 
 		//creamos las listas que tendremos que devolver
-		List<String> cartaEncontradas = new ArrayList<String>();
+		List<Product> cartaEncontradas = new ArrayList<Product>();
 		List<String> cartaNoEncontradas = new ArrayList<String>();
 		Double precioAcumulado= new Double(0);
 
@@ -46,20 +47,20 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 			String nombre =  (String) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE);
 			boolean foil = (boolean) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL);
 
+			Product producto=null;
 			//si trae Id buscamos por el, en caso contrario por nombre
-			Float precio=new Float(0F);
 			if(!Utilidades.isNull(id)) {
-				precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(id, foil);
+				producto = WSObtenerInformacionCartas.obtenerCarta(id, foil);
 			}
-
 			else if(!Utilidades.isNull(nombre)){
-				 precio = WSObtenerInformacionCartas.obtenerPrecioMinimoCarta(nombre, juego, idioma, expansion, foil);
+				producto = WSObtenerInformacionCartas.obtenerCarta(nombre, juego, idioma, expansion, foil);
 			}
 
+			Float precio=obtenerPrecioMinimoProducto(producto, foil);
 			//si el servicio nos devuelve precio 0 es que no ha encontrado la carta
 			if(!Utilidades.isZero(precio)) {
-				cartaEncontradas.add(nombre);
-				precioAcumulado = Double.sum(precioAcumulado, precio);
+				cartaEncontradas.add(producto);
+				precioAcumulado = Double.sum(precioAcumulado, Utilidades.round(precio, 2).doubleValue());
 			}
 			else {
 				cartaNoEncontradas.add(nombre);
@@ -70,13 +71,37 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 
 		OutputObtenerPrecioColeccion salida= new OutputObtenerPrecioColeccion();
 		salida.setListadoCartasEncontradas(cartaEncontradas);
+		//solo aplica para cuando busquemos por nombre
 		salida.setListadoCartasNoEncontradas(cartaNoEncontradas);
 		salida.setPrecioColeccion(precioAcumulado);
 		log.info("Final- SNObtenerPrecioColeccion");
 		return salida;
 
 	}
+	/**
+	 * Metodo que te devuelve el precio minimo de un producto diferenciando si es foil o no
+	 * en caso de nulo devolvera 0
+	 * @param producto
+	 * @param esFoil
+	 * @return
+	 */
 
+	private Float obtenerPrecioMinimoProducto(Product producto, boolean esFoil) {
+		if(!Utilidades.isNull(producto)) {
+			if(esFoil) {
+				  log.info("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
+						  + producto.getPriceGuide().getLOWFOIL() + " euros");
+				  return producto.getPriceGuide().getLOWFOIL();
+			  }
+			  else {
+				  log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
+						  + producto.getPriceGuide().getLOW() + " euros");
+				  return producto.getPriceGuide().getLOW();
+			  }
+		}
+		return 0F;
+
+	}
 
 
 	@Override

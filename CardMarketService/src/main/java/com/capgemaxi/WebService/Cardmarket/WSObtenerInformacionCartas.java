@@ -20,7 +20,7 @@ public class WSObtenerInformacionCartas {
 	 * @return
 	 */
 
-	public static Float obtenerPrecioMinimoCarta(String carta, int juego, int idioma, String expansion, boolean foil) {
+	public static Product obtenerCarta(String carta, int juego, int idioma, String expansion, boolean foil) {
 
 		 WebServiceCall app = new WebServiceCall();
 		 StringBuilder str = new StringBuilder();
@@ -42,25 +42,17 @@ public class WSObtenerInformacionCartas {
 			  for(Product producto: salidaWebService.getProduct()) {
 				  if(!Utilidades.isNull(producto)) {
 					  //si coincide la expansion...
-					  if(expansion.toLowerCase().equals(producto.getExpansion().toLowerCase())) {
-						  if(foil) {
-							  log.info("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
-									  + producto.getPriceGuide().getLOWFOIL() + " euros");
-							  return producto.getPriceGuide().getLOWFOIL();
-						  }
-						  else {
-							  log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
-									  + producto.getPriceGuide().getLOW() + " euros");
-							  return producto.getPriceGuide().getLOW();
 
-						  }
+					  if(expansion.toLowerCase().equals(producto.getExpansion().toLowerCase())) {
+							  return producto;
+
 					  }
 				  }
 			  }
 
           }
 
-		return new Float(0F);
+		return null;
 
 	}
 
@@ -71,7 +63,7 @@ public class WSObtenerInformacionCartas {
 	 * @return
 	 */
 
-	public static Float obtenerPrecioMinimoCarta(Integer id, boolean foil) {
+	public static Product obtenerCarta(Integer id, boolean foil) {
 		 WebServiceCall app = new WebServiceCall();
 		 StringBuilder str = new StringBuilder();
 		 str.append("https://www.mkmapi.eu/ws/v1.1/product/");
@@ -81,27 +73,16 @@ public class WSObtenerInformacionCartas {
 			  Response salidaWebService = new Response();
 			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService);
 
-			  //solo deberia venir 1 producto
+			  //solo deberia venir 1 producto ya uqe las ID son unicas
 			  for(Product producto: salidaWebService.getProduct()) {
 				  if(!Utilidades.isNull(producto)) {
-					  //si coincide la expansion...
-						  if(foil) {
-							  log.info("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
-									  + producto.getPriceGuide().getLOWFOIL() + " euros");
-							  return producto.getPriceGuide().getLOWFOIL();
-						  }
-						  else {
-							  log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
-									  + producto.getPriceGuide().getLOW() + " euros");
-							  return producto.getPriceGuide().getLOW();
-
-						  }
+						 return producto;
 
 				  }
 			  }
 
           }
-		  return new Float(0F);
+		  return null;
 	}
 
 }
