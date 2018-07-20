@@ -1,5 +1,6 @@
 package com.capgemaxi.ServiciosNegocio;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +40,9 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 		//creamos las listas que tendremos que devolver
 		List<Product> cartaEncontradas = new ArrayList<Product>();
 		List<String> cartaNoEncontradas = new ArrayList<String>();
-		Double precioAcumulado= new Double(0);
+		BigDecimal precioAcumulado= BigDecimal.ZERO;
 
+		//recorremos las cartas de entrada
 		for(Map<String, Object> carta :entrada.getListadoCartas()) {
 			Integer id = (Integer) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_ID);
 			String expansion=(String) carta.get(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION);
@@ -56,11 +58,11 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 				producto = WSObtenerInformacionCartas.obtenerCarta(nombre, juego, idioma, expansion, foil);
 			}
 
-			Float precio=obtenerPrecioMinimoProducto(producto, foil);
+			BigDecimal precio=obtenerPrecioMinimoProducto(producto, foil);
 			//si el servicio nos devuelve precio 0 es que no ha encontrado la carta
 			if(!Utilidades.isZero(precio)) {
 				cartaEncontradas.add(producto);
-				precioAcumulado = Double.sum(precioAcumulado, Utilidades.round(precio, 2).doubleValue());
+				precioAcumulado = precioAcumulado.add(precio);
 			}
 			else {
 				cartaNoEncontradas.add(nombre);
@@ -86,20 +88,20 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 	 * @return
 	 */
 
-	private Float obtenerPrecioMinimoProducto(Product producto, boolean esFoil) {
+	private BigDecimal obtenerPrecioMinimoProducto(Product producto, boolean esFoil) {
 		if(!Utilidades.isNull(producto)) {
 			if(esFoil) {
 				  log.info("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
 						  + producto.getPriceGuide().getLOWFOIL() + " euros");
-				  return producto.getPriceGuide().getLOWFOIL();
+				  return Utilidades.getBigDecimalFromFloat(producto.getPriceGuide().getLOWFOIL());
 			  }
 			  else {
 				  log.info("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
 						  + producto.getPriceGuide().getLOW() + " euros");
-				  return producto.getPriceGuide().getLOW();
+				  return Utilidades.getBigDecimalFromFloat(producto.getPriceGuide().getLOW());
 			  }
 		}
-		return 0F;
+		return BigDecimal.ZERO;
 
 	}
 

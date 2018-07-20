@@ -16,6 +16,7 @@ public abstract class ServicioNegocio {
 	public Object entradaServicio;
 	FileHandler fh;
 
+
 	public static final Logger log = Logger.getLogger(ServicioNegocio.class.getName());
 
 	 /**
@@ -54,10 +55,11 @@ public abstract class ServicioNegocio {
 
 			log.log(Level.SEVERE, "Detalles del error: "+ error.getMessage() +
 					"////Causa: " + error.getCause());
-
-			//TODO rollback base de datos y devolver error
-
-
+			
+			//TODO rollback base de datos 
+			//devolvemos el error
+			 salida = new OutputServicioNegocio() ;
+			 salida.setError(error);
 		}
 
 		return salida;

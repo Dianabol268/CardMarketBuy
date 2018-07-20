@@ -1,0 +1,23 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="article">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:int" name="idProduct"/>
+              <xs:element type="xs:byte" name="idLanguage"/>
+              <xs:element type="xs:string" name="comments"/>
+              <xs:element type="xs:byte" name="count"/>
+              <xs:element type="xs:byte" name="price"/>
+              <xs:element type="xs:string" name="condition"/>
+              <xs:element type="xs:string" name="isFoil"/>
+              <xs:element type="xs:string" name="isSigned"/>
+              <xs:element type="xs:string" name="isPlayset"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,21 +1,13 @@
 package com.capgemaxi.util;
 
-import java.io.File;
 import java.io.StringReader;
 import java.math.BigDecimal;
-
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.JAXBIntrospector;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.namespace.QName;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.capgemaxi.WebService.Cardmarket.WSObtenerInformacionCartas;
+
 
 
 public final class Utilidades {
@@ -65,6 +57,19 @@ public final class Utilidades {
 		return objeto;
 	}
 
+	  /**
+	  * Converts a Double to BigDecimal in the most efficient and accurate manner
+	  * BigDecimal is the preferred format for .Net
+	  * @param number
+	  * @return
+	  */
+	  public static BigDecimal getBigDecimalFromFloat(Float number)
+	  {
+	    String strNumber = number.toString();
+	    BigDecimal bdReturn = new BigDecimal(strNumber);
+	    return bdReturn;
+	  }
+	
 	/**
      * Round to certain number of decimals
      *

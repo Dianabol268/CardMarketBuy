@@ -23,17 +23,17 @@ public class ServicioNegocioTest {
 		toIn.setIdioma(1);
 		toIn.setIdJuego(1);
 		List<Map<String, Object>> listadoCartas = new ArrayList<Map<String, Object>>();
-//		Map<String, Object> mapRaise = new HashMap<String, Object>();
-//		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION, "mirrodin");
-//		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "raise_the_alarm");
-//		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL, false);
-//		listadoCartas.add(mapRaise);
+		Map<String, Object> mapRaise = new HashMap<String, Object>();
+		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION, "mirrodin");
+		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "raise_the_alarm");
+		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL, false);
+		listadoCartas.add(mapRaise);
 
-//		Map<String, Object> mapCaster = new HashMap<String, Object>();
-//		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION, "innistrad");
-//		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "snapcaster_mage");
-//		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL, false);
-//		listadoCartas.add(mapCaster);
+		Map<String, Object> mapCaster = new HashMap<String, Object>();
+		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION, "innistrad");
+		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "snapcaster_mage");
+		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL, false);
+		listadoCartas.add(mapCaster);
 
 		Map<String, Object> mapCarta = new HashMap<String, Object>();
 		mapCarta.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_ID, 12);
