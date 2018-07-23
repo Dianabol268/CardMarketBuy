@@ -13,6 +13,8 @@ import org.junit.Test;
 import com.capgemaxi.ServiciosNegocio.SNObtenerPrecioColeccion;
 import com.capgemaxi.ServiciosNegocio.TO.IN.InputObtenerPrecioColeccion;
 import com.capgemaxi.ServiciosNegocio.TO.OUT.OutputObtenerPrecioColeccion;
+import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceCall;
+import com.capgemaxi.WebService.Cardmarket.pojo.Response;
 
 public class ServicioNegocioTest {
 
@@ -43,7 +45,15 @@ public class ServicioNegocioTest {
 		toIn.setListadoCartas(listadoCartas);
 
 		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
-		Assert.assertEquals(toOut.getPrecioColeccion(), null);
+
+		WebServiceCall app = new WebServiceCall();
+		 StringBuilder str = new StringBuilder();
+		 str.append("https://www.mkmapi.eu/ws/v2.0/games");
+
+
+		  if (app.requestCard(str.toString())) { //  game  lenguaje isexact
+			  Response salidaWebService = new Response();
+		  }
 	  }
 
 }
