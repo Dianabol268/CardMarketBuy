@@ -5,13 +5,29 @@ import java.math.BigDecimal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+
+import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 
 public final class Utilidades {
-	public static final Logger log = Logger.getLogger(Utilidades.class.getName());
+
+
+
+	/**
+	 *
+	 * metodo que escribira en el log dependiendo de si estan activados o no TODO el si estan activados o no
+	 */
+	public static void escribirLogInfo(String info, Logger log) {
+		if (log!=null){
+			log.info(info);
+		}
+
+	}
+
 
 	/**
 	 * metodo que devuelve true si el numero que nos pasan es nulo o 0
@@ -42,7 +58,7 @@ public final class Utilidades {
 	 * @param <JAXBContext>
 	 */
 
-	public static Object unMarshall(StringBuffer stringBuffer, Object objeto) {
+	public static Object unMarshall(StringBuffer stringBuffer, Object objeto, Logger log) {
 		if(stringBuffer != null && objeto!=null){
 			   try {
 				   JAXBContext jaxbContext = JAXBContext.newInstance(objeto.getClass());
@@ -69,7 +85,7 @@ public final class Utilidades {
 	    BigDecimal bdReturn = new BigDecimal(strNumber);
 	    return bdReturn;
 	  }
-	
+
 	/**
      * Round to certain number of decimals
      *

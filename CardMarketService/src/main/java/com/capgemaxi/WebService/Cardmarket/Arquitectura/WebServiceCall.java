@@ -7,13 +7,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import com.capgemaxi.util.Utilidades;
+
 /**
- * Clase que gestiona todas las llamadas a el webService de negocio de MKM 
+ * Clase que gestiona todas las llamadas a el webService de negocio de MKM
  * @author Astur
  *
  */
@@ -27,37 +31,36 @@ public class WebServiceCall {
        private Throwable lastError;
        private int lastCode;
        private StringBuffer lastContent;
-       private boolean debug;
+       private boolean debugDE;
+       Logger log;
 
        /**
         * Constructor.
+     * @param log
 
         */
-       public WebServiceCall() {
+       public WebServiceCall(Logger log) {
            mkmAppToken = WebServiceProperties.mkmAppToken;
            mkmAppSecret = WebServiceProperties.mkmAppSecret;
            mkmAccessToken = WebServiceProperties.mkmAccessToken;
            mkmAccessTokenSecret = WebServiceProperties.mkmAccessTokenSecret;
-
+           this.log= log;
            lastError = null;
-           debug = false;
        }
 
 
 
        /**
-        * Metodo que nos devuelve un objeto de tipo carta
+        * Metodo que nos devuelve en un String la salida que devuelva la llamada a MKM
         * @param requestURL url to be requested. Ex. https://www.mkmapi.eu/ws/v1.1/products/island/1/1/false
         * @return true if request was successfully executed. You can retrieve the content with responseContent();
         */
-       public boolean requestCard(String requestURL) {
+       public boolean requestMKM(String requestURL) {
            lastError = null;
            lastCode = 0;
            lastContent = new StringBuffer();
            try {
-
-               _debug("Requesting "+requestURL);
-
+        	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
                String realm = requestURL ;
                String oauth_version = "1.0" ;
                String oauth_consumer_key = mkmAppToken ;
@@ -112,7 +115,7 @@ public class WebServiceCall {
 
                lastCode = connection.getResponseCode();
 
-               _debug("Response Code is "+lastCode);
+               Utilidades.escribirLogInfo("Response Code is \"+lastCode", log);
 
                if (200 == lastCode || 401 == lastCode || 404 == lastCode) {
                    BufferedReader rd = new BufferedReader(new InputStreamReader(lastCode==200?connection.getInputStream():connection.getErrorStream()));
@@ -123,13 +126,13 @@ public class WebServiceCall {
                    }
                    rd.close();
                    lastContent = sb;
-                   _debug("Response Content is \n"+lastContent);
+                   Utilidades.escribirLogInfo("Response Content is \n"+lastContent, log);
                }
 
                return (lastCode == 200);
 
            } catch (Exception e) {
-               _debug("(!) Error while requesting "+requestURL);
+        	   log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
                lastError = e;
            }
            return false;
@@ -137,13 +140,7 @@ public class WebServiceCall {
 
        //SET/get de cmapos de la clase
 
-       /**
-        * Activates the console debug messages
-        * @param flag true if you want to enable console messages; false to disable any notification.
-        */
-       public void setDebug(boolean flag) {
-           debug = flag;
-       }
+
 
        /**
         * Encoding function. To avoid deprecated version, the encoding used is UTF-8.
@@ -155,13 +152,6 @@ public class WebServiceCall {
            return URLEncoder.encode(str, "UTF-8");
        }
 
-       private void _debug(String msg) {
-           if (debug) {
-               System.out.print(GregorianCalendar.getInstance().getTime());
-               System.out.print(" > ");
-               System.out.println(msg);
-           }
-       }
 
        /**
         * Get last Error exception.
@@ -181,6 +171,7 @@ public class WebServiceCall {
 
        /**
         * Get response content from last request.
+     * @param log
         * @return
         */
        public StringBuffer responseContent() {
@@ -189,27 +180,6 @@ public class WebServiceCall {
 
        //fin SET/get de cmapos de la clase
 
-       public static void main(String[] args) {
-           // USAGE EXAMPLE
 
-           WebServiceCall app = new WebServiceCall();
-
-           if (app.requestCard("https://www.mkmapi.eu/ws/v1.1/account")) {
-               System.out.println(app.responseContent());
-           }
-
-           // test with active console debug
-           app.setDebug(true);
-
-           if (app.requestCard("https://www.mkmapi.eu/ws/v1.1/products/serra_angel/1/1/false")) {//  game  lenguaje isexact
-        	   System.out.println(app.lastContent);
-           }
-           if (app.requestCard("https://www.mkmapi.eu/ws/v1.1/products/goblin_ch/1/1/false")) {
-               // .. process(app.responseContent());
-           }
-
-
-           // etc....
-       }
 
    }

@@ -46,13 +46,14 @@ public class ServicioNegocioTest {
 
 		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
 
-		WebServiceCall app = new WebServiceCall();
+		WebServiceCall app = new WebServiceCall(null);
 		 StringBuilder str = new StringBuilder();
-		 str.append("https://www.mkmapi.eu/ws/v2.0/games");
+		 str.append("https://www.mkmapi.eu/ws/v2.0/expansions/15/singles");
 
 
-		  if (app.requestCard(str.toString())) { //  game  lenguaje isexact
+		  if (app.requestMKM(str.toString())) { //  game  lenguaje isexact
 			  Response salidaWebService = new Response();
+			  System.out.println(app.responseContent());
 		  }
 	  }
 

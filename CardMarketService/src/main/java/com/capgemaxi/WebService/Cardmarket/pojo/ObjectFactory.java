@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.8-b130911.1802 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2018.07.18 a las 11:35:15 AM CEST 
+// Generado el: 2018.07.23 a las 11:10:01 AM CEST 
 //
 
 
@@ -64,6 +64,18 @@ public class ObjectFactory {
      * Create an instance of {@link Response.Product.Category }
      * 
      */
+    public Request createRequest() {
+        return new Request();
+    }
+
+    /**
+     * Create an instance of {@link Request.Article }
+     * 
+     */
+    public Request.Article createRequestArticle() {
+        return new Request.Article();
+    }
+    
     public Response.Product.Category createResponseProductCategory() {
         return new Response.Product.Category();
     }
@@ -75,5 +87,4 @@ public class ObjectFactory {
     public Response.Product.PriceGuide createResponseProductPriceGuide() {
         return new Response.Product.PriceGuide();
     }
-
 }
