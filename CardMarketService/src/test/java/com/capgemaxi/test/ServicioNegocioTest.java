@@ -9,11 +9,13 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-
+import com.capgemaxi.ServiciosNegocio.SNAgregarColeccionVender;
 import com.capgemaxi.ServiciosNegocio.SNObtenerPrecioColeccion;
+import com.capgemaxi.ServiciosNegocio.TO.IN.InputAgregarColeccionVender;
 import com.capgemaxi.ServiciosNegocio.TO.IN.InputObtenerPrecioColeccion;
 import com.capgemaxi.ServiciosNegocio.TO.OUT.OutputObtenerPrecioColeccion;
 import com.capgemaxi.WebService.Cardmarket.Arquitectura.WebServiceCall;
+import com.capgemaxi.WebService.Cardmarket.pojo.Request.Article;
 import com.capgemaxi.WebService.Cardmarket.pojo.Response;
 
 public class ServicioNegocioTest {
@@ -44,17 +46,31 @@ public class ServicioNegocioTest {
 
 		toIn.setListadoCartas(listadoCartas);
 
-		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
+	//	OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
 
-		WebServiceCall app = new WebServiceCall(null);
-		 StringBuilder str = new StringBuilder();
-		 str.append("https://www.mkmapi.eu/ws/v2.0/expansions/15/singles");
+//		WebServiceCall app = new WebServiceCall(null);
+//		 StringBuilder str = new StringBuilder();
+//		 str.append("https://www.mkmapi.eu/ws/v2.0/expansions/15/singles");
+//
+//
+//		  if (app.requestMKM(str.toString())) { //  game  lenguaje isexact
+//			  Response salidaWebService = new Response();
+//			  System.out.println(app.responseContent());
+//		  }
 
 
-		  if (app.requestMKM(str.toString())) { //  game  lenguaje isexact
-			  Response salidaWebService = new Response();
-			  System.out.println(app.responseContent());
-		  }
+		Article carta = new Article();
+		carta.setIdProduct(2);
+		carta.setCondition("NM");
+		carta.setIdLanguage(1);
+		carta.setCount(1);
+		carta.setPrice(25.5F);
+		List<Article> lista = new ArrayList<Article>();
+		lista.add(carta);
+		SNAgregarColeccionVender sn = new SNAgregarColeccionVender();
+		InputAgregarColeccionVender toIn2 = new InputAgregarColeccionVender();
+		toIn2.setListaCartas(lista);
+		sn.llamadaServicio(toIn2);
 	  }
 
 }

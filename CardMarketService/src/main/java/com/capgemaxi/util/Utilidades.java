@@ -1,9 +1,14 @@
 package com.capgemaxi.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
@@ -54,7 +59,7 @@ public final class Utilidades {
 	}
 
 	/**
-	 *Metodo que te rellena un Objeto
+	 *Metodo que te rellena un Objeto con un xml de entrada
 	 * @param <JAXBContext>
 	 */
 
@@ -71,6 +76,30 @@ public final class Utilidades {
 			}
 		}
 		return objeto;
+	}
+
+	/**
+	 * Metodo que con un objeto te crea un XML con el objeto de entrada
+	 */
+	public static ObjectOutputStream marshall(Object objeto, Logger log) {
+
+		ObjectOutputStream oos = null;
+			   try {
+				   ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				   oos= new ObjectOutputStream(baos);
+				   JAXBContext jaxbContext = JAXBContext.newInstance(objeto.getClass());
+				   Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+				   jaxbMarshaller.marshal(objeto, oos);
+
+				   //no deberia darse
+			} catch (JAXBException error) {
+				log.log(Level.SEVERE, "Error haciendo el marshall del xml: Detalles del error: "+ error.getMessage() +
+						"////Causa: " + error.getCause());
+			} catch (IOException e) {
+
+			}
+
+		return oos;
 	}
 
 	  /**

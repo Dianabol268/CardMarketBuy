@@ -6,10 +6,10 @@
           <xs:complexType>
             <xs:sequence>
               <xs:element type="xs:int" name="idProduct"/>
-              <xs:element type="xs:byte" name="idLanguage"/>
+              <xs:element type="xs:int" name="idLanguage"/>
               <xs:element type="xs:string" name="comments"/>
-              <xs:element type="xs:byte" name="count"/>
-              <xs:element type="xs:byte" name="price"/>
+              <xs:element type="xs:int" name="count"/>
+              <xs:element type="xs:float" name="price"/>
               <xs:element type="xs:string" name="condition"/>
               <xs:element type="xs:string" name="isFoil"/>
               <xs:element type="xs:string" name="isSigned"/>

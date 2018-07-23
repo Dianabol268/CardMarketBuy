@@ -1,12 +1,12 @@
 //
-// Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.8-b130911.1802
-// Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
-// Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen.
-// Generado el: 2018.07.23 a las 01:00:59 PM CEST
+// Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.8-b130911.1802 
+// Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+// Generado el: 2018.07.23 a las 01:00:59 PM CEST 
 //
 
 
-package com.capgemaxi.WebService.Cardmarket.pojo;
+package generated;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Clase Java para anonymous complex type.
- *
+ * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
- *
+ * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -49,8 +49,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -64,11 +64,11 @@ public class Request {
 
     /**
      * Obtiene el valor de la propiedad article.
-     *
+     * 
      * @return
      *     possible object is
      *     {@link Request.Article }
-     *
+     *     
      */
     public Request.Article getArticle() {
         return article;
@@ -76,11 +76,11 @@ public class Request {
 
     /**
      * Define el valor de la propiedad article.
-     *
+     * 
      * @param value
      *     allowed object is
      *     {@link Request.Article }
-     *
+     *     
      */
     public void setArticle(Request.Article value) {
         this.article = value;
@@ -89,9 +89,9 @@ public class Request {
 
     /**
      * <p>Clase Java para anonymous complex type.
-     *
+     * 
      * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
-     *
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -111,8 +111,8 @@ public class Request {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     *
-     *
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
@@ -145,7 +145,7 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad idProduct.
-         *
+         * 
          */
         public int getIdProduct() {
             return idProduct;
@@ -153,7 +153,7 @@ public class Request {
 
         /**
          * Define el valor de la propiedad idProduct.
-         *
+         * 
          */
         public void setIdProduct(int value) {
             this.idProduct = value;
@@ -161,7 +161,7 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad idLanguage.
-         *
+         * 
          */
         public int getIdLanguage() {
             return idLanguage;
@@ -169,7 +169,7 @@ public class Request {
 
         /**
          * Define el valor de la propiedad idLanguage.
-         *
+         * 
          */
         public void setIdLanguage(int value) {
             this.idLanguage = value;
@@ -177,11 +177,11 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad comments.
-         *
+         * 
          * @return
          *     possible object is
          *     {@link String }
-         *
+         *     
          */
         public String getComments() {
             return comments;
@@ -189,11 +189,11 @@ public class Request {
 
         /**
          * Define el valor de la propiedad comments.
-         *
+         * 
          * @param value
          *     allowed object is
          *     {@link String }
-         *
+         *     
          */
         public void setComments(String value) {
             this.comments = value;
@@ -201,7 +201,7 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad count.
-         *
+         * 
          */
         public int getCount() {
             return count;
@@ -209,7 +209,7 @@ public class Request {
 
         /**
          * Define el valor de la propiedad count.
-         *
+         * 
          */
         public void setCount(int value) {
             this.count = value;
@@ -217,7 +217,7 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad price.
-         *
+         * 
          */
         public float getPrice() {
             return price;
@@ -225,7 +225,7 @@ public class Request {
 
         /**
          * Define el valor de la propiedad price.
-         *
+         * 
          */
         public void setPrice(float value) {
             this.price = value;
@@ -233,11 +233,11 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad condition.
-         *
+         * 
          * @return
          *     possible object is
          *     {@link String }
-         *
+         *     
          */
         public String getCondition() {
             return condition;
@@ -245,11 +245,11 @@ public class Request {
 
         /**
          * Define el valor de la propiedad condition.
-         *
+         * 
          * @param value
          *     allowed object is
          *     {@link String }
-         *
+         *     
          */
         public void setCondition(String value) {
             this.condition = value;
@@ -257,11 +257,11 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad isFoil.
-         *
+         * 
          * @return
          *     possible object is
          *     {@link String }
-         *
+         *     
          */
         public String getIsFoil() {
             return isFoil;
@@ -269,11 +269,11 @@ public class Request {
 
         /**
          * Define el valor de la propiedad isFoil.
-         *
+         * 
          * @param value
          *     allowed object is
          *     {@link String }
-         *
+         *     
          */
         public void setIsFoil(String value) {
             this.isFoil = value;
@@ -281,11 +281,11 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad isSigned.
-         *
+         * 
          * @return
          *     possible object is
          *     {@link String }
-         *
+         *     
          */
         public String getIsSigned() {
             return isSigned;
@@ -293,11 +293,11 @@ public class Request {
 
         /**
          * Define el valor de la propiedad isSigned.
-         *
+         * 
          * @param value
          *     allowed object is
          *     {@link String }
-         *
+         *     
          */
         public void setIsSigned(String value) {
             this.isSigned = value;
@@ -305,11 +305,11 @@ public class Request {
 
         /**
          * Obtiene el valor de la propiedad isPlayset.
-         *
+         * 
          * @return
          *     possible object is
          *     {@link String }
-         *
+         *     
          */
         public String getIsPlayset() {
             return isPlayset;
@@ -317,11 +317,11 @@ public class Request {
 
         /**
          * Define el valor de la propiedad isPlayset.
-         *
+         * 
          * @param value
          *     allowed object is
          *     {@link String }
-         *
+         *     
          */
         public void setIsPlayset(String value) {
             this.isPlayset = value;
