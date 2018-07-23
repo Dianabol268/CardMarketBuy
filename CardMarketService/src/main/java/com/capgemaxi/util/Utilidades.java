@@ -81,25 +81,22 @@ public final class Utilidades {
 	/**
 	 * Metodo que con un objeto te crea un XML con el objeto de entrada
 	 */
-	public static ObjectOutputStream marshall(Object objeto, Logger log) {
+	public static ByteArrayOutputStream marshall(Object objeto, Logger log) {
 
-		ObjectOutputStream oos = null;
+		   ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			   try {
-				   ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				   oos= new ObjectOutputStream(baos);
+
 				   JAXBContext jaxbContext = JAXBContext.newInstance(objeto.getClass());
 				   Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-				   jaxbMarshaller.marshal(objeto, oos);
+				   jaxbMarshaller.marshal(objeto, baos);
 
 				   //no deberia darse
 			} catch (JAXBException error) {
 				log.log(Level.SEVERE, "Error haciendo el marshall del xml: Detalles del error: "+ error.getMessage() +
 						"////Causa: " + error.getCause());
-			} catch (IOException e) {
-
 			}
 
-		return oos;
+		return baos;
 	}
 
 	  /**

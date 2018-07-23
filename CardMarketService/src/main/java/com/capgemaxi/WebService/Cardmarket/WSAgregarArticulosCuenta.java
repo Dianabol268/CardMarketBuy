@@ -1,5 +1,6 @@
 package com.capgemaxi.WebService.Cardmarket;
 
+import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ public class WSAgregarArticulosCuenta {
 
 		Request request = new Request();
 		request.setArticle(carta);
-		ObjectOutputStream oos = Utilidades.marshall(request, log);
+		ByteArrayOutputStream oos = Utilidades.marshall(request, log);
 		System.out.println(oos.toString());
 	}
 

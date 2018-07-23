@@ -46,7 +46,7 @@ public class ServicioNegocioTest {
 
 		toIn.setListadoCartas(listadoCartas);
 
-	//	OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
+		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
 
 //		WebServiceCall app = new WebServiceCall(null);
 //		 StringBuilder str = new StringBuilder();

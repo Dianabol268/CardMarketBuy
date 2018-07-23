@@ -48,6 +48,62 @@ public class WebServiceCall {
            lastError = null;
        }
 
+       private String obtenerSignature(String requestURL) {
+    	   try {
+    	   String realm = requestURL ;
+           String oauth_version = "1.0" ;
+           String oauth_consumer_key = mkmAppToken ;
+           String oauth_token = mkmAccessToken ;
+           String oauth_signature_method = "HMAC-SHA1" ;
+           // String oauth_timestamp = "" + (System.currentTimeMillis()/1000) ;
+           String oauth_timestamp = "1407917892" ;
+           // String oauth_nonce = "" + System.currentTimeMillis() ;
+           String oauth_nonce = "53eb1f44909d6" ;
+
+
+           String encodedRequestURL = rawurlencode(requestURL) ;
+
+           String baseString = "GET&" + encodedRequestURL + "&" ;
+
+           String paramString = "oauth_consumer_key=" + rawurlencode(oauth_consumer_key) + "&" +
+                                "oauth_nonce=" + rawurlencode(oauth_nonce) + "&" +
+                                "oauth_signature_method=" + rawurlencode(oauth_signature_method) + "&" +
+                                "oauth_timestamp=" + rawurlencode(oauth_timestamp) + "&" +
+                                "oauth_token=" + rawurlencode(oauth_token) + "&" +
+                                "oauth_version=" + rawurlencode(oauth_version) ;
+
+           baseString = baseString + rawurlencode(paramString) ;
+
+           String signingKey = rawurlencode(mkmAppSecret) +
+                       "&" +
+                       rawurlencode(mkmAccessTokenSecret) ;
+
+           Mac mac = Mac.getInstance("HmacSHA1");
+           SecretKeySpec secret = new SecretKeySpec(signingKey.getBytes(), mac.getAlgorithm());
+           mac.init(secret);
+           byte[] digest = mac.doFinal(baseString.getBytes());
+           String oauth_signature =  DatatypeConverter.printBase64Binary(digest);    //Base64.encode(digest) ;
+           String authorizationProperty =
+                   "OAuth " +
+                   "realm=\"" + realm + "\", " +
+                   "oauth_version=\"" + oauth_version + "\", " +
+                   "oauth_timestamp=\"" + oauth_timestamp + "\", " +
+                   "oauth_nonce=\"" + oauth_nonce + "\", " +
+                   "oauth_consumer_key=\"" + oauth_consumer_key + "\", " +
+                   "oauth_token=\"" + oauth_token + "\", " +
+                   "oauth_signature_method=\"" + oauth_signature_method + "\", " +
+                   "oauth_signature=\"" + oauth_signature + "\""
+                   ;
+           return authorizationProperty;
+    	   }
+    	   catch (Exception e) {
+        	   log.log(Level.SEVERE,"(!) Error while requesting obtenerSignature:" +requestURL);
+               lastError = e;
+           }
+    	   return "";
+       }
+
+
 
 
        /**
@@ -55,59 +111,16 @@ public class WebServiceCall {
         * @param requestURL url to be requested. Ex. https://www.mkmapi.eu/ws/v1.1/products/island/1/1/false
         * @return true if request was successfully executed. You can retrieve the content with responseContent();
         */
-       public boolean requestMKM(String requestURL) {
+       public boolean requestMKMGet(String requestURL) {
            lastError = null;
            lastCode = 0;
            lastContent = new StringBuffer();
            try {
         	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
-               String realm = requestURL ;
-               String oauth_version = "1.0" ;
-               String oauth_consumer_key = mkmAppToken ;
-               String oauth_token = mkmAccessToken ;
-               String oauth_signature_method = "HMAC-SHA1" ;
-               // String oauth_timestamp = "" + (System.currentTimeMillis()/1000) ;
-               String oauth_timestamp = "1407917892" ;
-               // String oauth_nonce = "" + System.currentTimeMillis() ;
-               String oauth_nonce = "53eb1f44909d6" ;
-
-
-               String encodedRequestURL = rawurlencode(requestURL) ;
-
-               String baseString = "GET&" + encodedRequestURL + "&" ;
-
-               String paramString = "oauth_consumer_key=" + rawurlencode(oauth_consumer_key) + "&" +
-                                    "oauth_nonce=" + rawurlencode(oauth_nonce) + "&" +
-                                    "oauth_signature_method=" + rawurlencode(oauth_signature_method) + "&" +
-                                    "oauth_timestamp=" + rawurlencode(oauth_timestamp) + "&" +
-                                    "oauth_token=" + rawurlencode(oauth_token) + "&" +
-                                    "oauth_version=" + rawurlencode(oauth_version) ;
-
-               baseString = baseString + rawurlencode(paramString) ;
-
-               String signingKey = rawurlencode(mkmAppSecret) +
-                           "&" +
-                           rawurlencode(mkmAccessTokenSecret) ;
-
-               Mac mac = Mac.getInstance("HmacSHA1");
-               SecretKeySpec secret = new SecretKeySpec(signingKey.getBytes(), mac.getAlgorithm());
-               mac.init(secret);
-               byte[] digest = mac.doFinal(baseString.getBytes());
-               String oauth_signature = DatatypeConverter.printBase64Binary(digest);    //Base64.encode(digest) ;
-
-               String authorizationProperty =
-                       "OAuth " +
-                       "realm=\"" + realm + "\", " +
-                       "oauth_version=\"" + oauth_version + "\", " +
-                       "oauth_timestamp=\"" + oauth_timestamp + "\", " +
-                       "oauth_nonce=\"" + oauth_nonce + "\", " +
-                       "oauth_consumer_key=\"" + oauth_consumer_key + "\", " +
-                       "oauth_token=\"" + oauth_token + "\", " +
-                       "oauth_signature_method=\"" + oauth_signature_method + "\", " +
-                       "oauth_signature=\"" + oauth_signature + "\"" ;
 
                HttpURLConnection connection = (HttpURLConnection) new URL(requestURL).openConnection();
-               connection.addRequestProperty("Authorization", authorizationProperty) ;
+               connection.addRequestProperty("Authorization", obtenerSignature(requestURL)) ;
+
                connection.connect() ;
 
                // from here standard actions...
@@ -140,7 +153,60 @@ public class WebServiceCall {
 
        //SET/get de cmapos de la clase
 
+       private String obtenerSignaturePost(String requestURL) {
+    	   try {
+    	   String realm = requestURL ;
+           String oauth_version = "1.0" ;
+           String oauth_consumer_key = mkmAppToken ;
+           String oauth_token = mkmAccessToken ;
+           String oauth_signature_method = "HMAC-SHA1" ;
+           // String oauth_timestamp = "" + (System.currentTimeMillis()/1000) ;
+           String oauth_timestamp = "1407917892" ;
+           // String oauth_nonce = "" + System.currentTimeMillis() ;
+           String oauth_nonce = "53eb1f44909d6" ;
 
+
+           String encodedRequestURL = rawurlencode(requestURL) ;
+
+           String baseString = "GET&" + encodedRequestURL + "&" ;
+
+           String paramString = "oauth_consumer_key=" + rawurlencode(oauth_consumer_key) + "&" +
+                                "oauth_nonce=" + rawurlencode(oauth_nonce) + "&" +
+                                "oauth_signature_method=" + rawurlencode(oauth_signature_method) + "&" +
+                                "oauth_timestamp=" + rawurlencode(oauth_timestamp) + "&" +
+                                "oauth_token=" + rawurlencode(oauth_token) + "&" +
+                                "oauth_version=" + rawurlencode(oauth_version) ;
+
+           baseString = baseString + rawurlencode(paramString) ;
+
+           String signingKey = rawurlencode(mkmAppSecret) +
+                       "&" +
+                       rawurlencode(mkmAccessTokenSecret) ;
+
+           Mac mac = Mac.getInstance("HmacSHA1");
+           SecretKeySpec secret = new SecretKeySpec(signingKey.getBytes(), mac.getAlgorithm());
+           mac.init(secret);
+           byte[] digest = mac.doFinal(baseString.getBytes());
+           String oauth_signature =  DatatypeConverter.printBase64Binary(digest);    //Base64.encode(digest) ;
+           String authorizationProperty =
+                   "OAuth " +
+                   "realm=\"" + realm + "\", " +
+                   "oauth_version=\"" + oauth_version + "\", " +
+                   "oauth_timestamp=\"" + oauth_timestamp + "\", " +
+                   "oauth_nonce=\"" + oauth_nonce + "\", " +
+                   "oauth_consumer_key=\"" + oauth_consumer_key + "\", " +
+                   "oauth_token=\"" + oauth_token + "\", " +
+                   "oauth_signature_method=\"" + oauth_signature_method + "\", " +
+                   "oauth_signature=\"" + oauth_signature + "\""
+                   ;
+           return authorizationProperty;
+    	   }
+    	   catch (Exception e) {
+        	   log.log(Level.SEVERE,"(!) Error while requesting obtenerSignature:" +requestURL);
+               lastError = e;
+           }
+    	   return "";
+       }
 
        /**
         * Encoding function. To avoid deprecated version, the encoding used is UTF-8.
