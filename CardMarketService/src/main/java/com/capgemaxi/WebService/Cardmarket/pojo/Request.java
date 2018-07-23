@@ -128,19 +128,19 @@ public class Request {
     })
     public static class Article {
 
+    	@XmlElement(required = true)
         protected int idProduct;
+    	@XmlElement(required = true)
         protected int idLanguage;
-        @XmlElement(required = true)
         protected String comments;
+        @XmlElement(required = true)
         protected int count;
+        @XmlElement(required = true)
         protected float price;
-        @XmlElement(required = true)
+
         protected String condition;
-        @XmlElement(required = true)
         protected String isFoil;
-        @XmlElement(required = true)
         protected String isSigned;
-        @XmlElement(required = true)
         protected String isPlayset;
 
         /**
