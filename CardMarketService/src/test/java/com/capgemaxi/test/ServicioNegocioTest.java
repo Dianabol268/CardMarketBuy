@@ -69,6 +69,10 @@ public class ServicioNegocioTest {
 		carta.setIdLanguage(1);
 		carta.setCount(1);
 		carta.setPrice(25.5F);
+		carta.setComments("Intrducido desde api");
+		carta.setIsFoil(false);
+		carta.setIsPlayset(false);
+		carta.setIsSigned(false);
 		List<Article> lista = new ArrayList<Article>();
 		lista.add(carta);
 		SNAgregarColeccionVender sn = new SNAgregarColeccionVender();

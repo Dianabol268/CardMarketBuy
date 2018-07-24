@@ -139,9 +139,9 @@ public class Request {
         protected float price;
 
         protected String condition;
-        protected String isFoil;
-        protected String isSigned;
-        protected String isPlayset;
+        protected boolean isFoil;
+        protected boolean isSigned;
+        protected boolean isPlayset;
 
         /**
          * Obtiene el valor de la propiedad idProduct.
@@ -263,7 +263,7 @@ public class Request {
          *     {@link String }
          *
          */
-        public String getIsFoil() {
+        public boolean getIsFoil() {
             return isFoil;
         }
 
@@ -275,7 +275,7 @@ public class Request {
          *     {@link String }
          *
          */
-        public void setIsFoil(String value) {
+        public void setIsFoil(boolean value) {
             this.isFoil = value;
         }
 
@@ -287,7 +287,7 @@ public class Request {
          *     {@link String }
          *
          */
-        public String getIsSigned() {
+        public boolean getIsSigned() {
             return isSigned;
         }
 
@@ -299,7 +299,7 @@ public class Request {
          *     {@link String }
          *
          */
-        public void setIsSigned(String value) {
+        public void setIsSigned(boolean value) {
             this.isSigned = value;
         }
 
@@ -311,7 +311,7 @@ public class Request {
          *     {@link String }
          *
          */
-        public String getIsPlayset() {
+        public boolean getIsPlayset() {
             return isPlayset;
         }
 
@@ -323,7 +323,7 @@ public class Request {
          *     {@link String }
          *
          */
-        public void setIsPlayset(String value) {
+        public void setIsPlayset(boolean value) {
             this.isPlayset = value;
         }
 
