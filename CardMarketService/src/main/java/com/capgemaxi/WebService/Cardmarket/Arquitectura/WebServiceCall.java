@@ -56,7 +56,7 @@ public class WebServiceCall {
            lastError = null;
        }
 
-       private String obtenerSignature(String requestURL) {
+       private String obtenerSignature(String requestURL, String tipoSignature) {
     	   try {
     	   String realm = requestURL ;
            String oauth_version = "1.0" ;
@@ -71,7 +71,7 @@ public class WebServiceCall {
 
            String encodedRequestURL = rawurlencode(requestURL) ;
 
-           String baseString = "GET&" + encodedRequestURL + "&" ;
+           String baseString = tipoSignature + "&" + encodedRequestURL + "&" ;
 
            String paramString = "oauth_consumer_key=" + rawurlencode(oauth_consumer_key) + "&" +
                                 "oauth_nonce=" + rawurlencode(oauth_nonce) + "&" +
@@ -128,7 +128,7 @@ public class WebServiceCall {
         	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
 
                connection = (HttpURLConnection) new URL(requestURL).openConnection();
-               connection.addRequestProperty("Authorization", obtenerSignature(requestURL)) ;
+               connection.addRequestProperty("Authorization", obtenerSignature(requestURL, "GET")) ;
 
                connection.connect() ;
 
@@ -181,7 +181,7 @@ public class WebServiceCall {
         	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
 
                 connection = (HttpURLConnection) new URL(requestURL).openConnection();
-               connection.addRequestProperty("Authorization", obtenerSignature(requestURL)) ;
+               connection.addRequestProperty("Authorization", obtenerSignature(requestURL, "POST")) ;
                connection.setDoOutput(true);
                connection.setRequestMethod("POST");
                connection.connect();
