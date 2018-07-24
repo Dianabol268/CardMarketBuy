@@ -4,6 +4,7 @@ package com.capgemaniac.WebService.Cardmarket;
 import java.util.logging.Logger;
 
 import com.capgemaniac.WebService.Cardmarket.Arquitectura.WebServiceCall;
+import com.capgemaniac.WebService.Cardmarket.Arquitectura.WebServiceProperties;
 import com.capgemaniac.WebService.Cardmarket.pojo.Response;
 import com.capgemaniac.WebService.Cardmarket.pojo.Response.Product;
 import com.capgemaniac.util.Utilidades;
@@ -11,7 +12,7 @@ import com.capgemaniac.util.Utilidades;
 public class WSObtenerInformacionCartas {
 
 		/**
-	 * devuelve el precio Minimo de una carta, de la expansion indicada, el nombre de la carta viene en el idioma indicado
+	 * devuelve el producto, de la expansion indicada, el nombre de la carta viene en el idioma indicado
 	 * diferencia entre foiol y no foil
 	 * @param carta
 	 * @param idioma
@@ -19,18 +20,16 @@ public class WSObtenerInformacionCartas {
 	 * @return
 	 */
 
-	public static Product obtenerCarta(String carta, int juego, int idioma, String expansion, boolean foil, Logger log) {
+	public static Product obtenerCarta(String carta, int juego, int idioma, String expansion, Logger log) {
 
 		 WebServiceCall app = new WebServiceCall(log);
 		 StringBuilder str = new StringBuilder();
-		 str.append("https://www.mkmapi.eu/ws/v1.1/products/");
+		 str.append(WebServiceProperties.URLCARDMARKET+ "products/find?search=");
 		 str.append(carta);
-		 str.append("/");
-		 str.append(juego);
-		 str.append("/");
-		 str.append(idioma);
-		 str.append("/");
-		 str.append("false");
+		 str.append("&");
+		 str.append("idGame=" + juego);
+		 str.append("&idLanguage="+idioma);
+
 
 		  if (app.requestMKMGet(str.toString())) { //  game  lenguaje isexact
 			  Response salidaWebService = new Response();
@@ -56,17 +55,17 @@ public class WSObtenerInformacionCartas {
 	}
 
 	/**
-	 * devuelve el precio Minimo de una carta,por el ID. tambien diferencia entre foil y no foil
+	 * devuelve el producto,por el ID. 
 	 * @param log
 	 * @param carta
 	 * @param idioma
 	 * @return
 	 */
 
-	public static Product obtenerCarta(Integer id, boolean foil, Logger log) {
+	public static Product obtenerCarta(Integer id,  Logger log) {
 		 WebServiceCall app = new WebServiceCall(log);
 		 StringBuilder str = new StringBuilder();
-		 str.append("https://www.mkmapi.eu/ws/v1.1/product/");
+		 str.append(WebServiceProperties.URLCARDMARKET+"product/");
 		 str.append(id);
 
 		  if (app.requestMKMGet(str.toString())) {

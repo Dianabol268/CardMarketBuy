@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.math.BigDecimal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,6 +14,8 @@ import javax.xml.bind.Unmarshaller;
 
 import com.capgemaniac.ServiciosNegocio.Arquitectura.ServicioNegocio;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +23,18 @@ import java.util.logging.Logger;
 
 public final class Utilidades {
 
-
+	 public static String join(Collection<?> s, String delimiter) {
+	        StringBuilder builder = new StringBuilder();
+	        Iterator<?> iter = s.iterator();
+	        while (iter.hasNext()) {
+	            builder.append(iter.next());
+	            if (!iter.hasNext()) {
+	              break;                  
+	            }
+	            builder.append(delimiter);
+	        }
+	        return builder.toString();
+	    }
 
 	/**
 	 *
@@ -57,7 +71,29 @@ public final class Utilidades {
 		}
 		return true;
 	}
-
+	
+	/**
+	 *  Metodo que realiza la conversion de un objeto Java a un String 
+	 */
+	public static String marshall(Object objeto, Logger log) {
+		
+		  JAXBContext jaxbContext;		  
+		try {
+			jaxbContext = JAXBContext.newInstance(objeto.getClass());
+			java.io.StringWriter sw = new StringWriter();
+	          Marshaller marshaller = jaxbContext.createMarshaller();
+	          marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+	          marshaller.marshal(objeto, sw);
+	         return sw.toString();
+		} 
+              
+         catch (JAXBException error) {
+        	 log.log(Level.SEVERE, "Error haciendo el marshall a xml: Detalles del error: "+ error.getMessage() +
+						"////Causa: " + error.getCause());
+ 		}
+		return null;
+	}
+	
 	/**
 	 *Metodo que te rellena un Objeto con un xml de entrada
 	 * @param <JAXBContext>
@@ -78,26 +114,7 @@ public final class Utilidades {
 		return objeto;
 	}
 
-	/**
-	 * Metodo que con un objeto te crea un XML con el objeto de entrada
-	 */
-	public static ByteArrayOutputStream marshall(Object objeto, Logger log) {
-
-		   ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			   try {
-
-				   JAXBContext jaxbContext = JAXBContext.newInstance(objeto.getClass());
-				   Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-				   jaxbMarshaller.marshal(objeto, baos);
-
-				   //no deberia darse
-			} catch (JAXBException error) {
-				log.log(Level.SEVERE, "Error haciendo el marshall del xml: Detalles del error: "+ error.getMessage() +
-						"////Causa: " + error.getCause());
-			}
-
-		return baos;
-	}
+	
 
 	  /**
 	  * Converts a Double to BigDecimal in the most efficient and accurate manner

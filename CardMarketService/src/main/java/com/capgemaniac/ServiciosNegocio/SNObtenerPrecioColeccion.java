@@ -52,10 +52,10 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 			Product producto=null;
 			//si trae Id buscamos por el, en caso contrario por nombre
 			if(!Utilidades.isNull(id)) {
-				producto = WSObtenerInformacionCartas.obtenerCarta(id, foil, log);
+				producto = WSObtenerInformacionCartas.obtenerCarta(id, log);
 			}
 			else if(!Utilidades.isNull(nombre)){
-				producto = WSObtenerInformacionCartas.obtenerCarta(nombre, juego, idioma, expansion, foil, log);
+				producto = WSObtenerInformacionCartas.obtenerCarta(nombre, juego, idioma, expansion, log);
 			}
 
 			BigDecimal precio=obtenerPrecioMinimoProducto(producto, foil);

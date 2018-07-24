@@ -11,7 +11,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,7 +60,112 @@ public class WebServiceCall {
            this.log= log;
            lastError = null;
        }
+       
+       
+       private Map<String,String> parseQueryString(String query)
+  	 {
+  	        Map<String,String> queryParameters = new TreeMap<>();
+  	         String[] querySegments = query.split("&");
+  	        for (String segment : querySegments)
+  	        {
+  	            String[] parts = segment.split("=");
+  	            if (parts.length > 0)
+  	            {
+  	                String key = parts[0].replaceAll("\\?", " ").trim();
+  	                String val = parts[1].trim();
+  	                queryParameters.put(key, val);
+  	            }
+  	        }
+  	        return queryParameters;
+  	 }
+       
+       public String generateOAuthSignature2(String url,String method) {
+	    	try{
 
+	             
+	    	 Map<String,String> headerParams;
+	         Map<String,String> encodedParams = new TreeMap<>();
+	         int index = url.indexOf('?');
+	         String signatureMethod = "HMAC-SHA1";
+	         String version = "1.0";
+	         String encode="UTF-8";
+	         String nonce="" + System.currentTimeMillis();
+	         String timestamp=""+ (System.currentTimeMillis()/1000);
+	         String baseUri = (index>0?url.substring(0,index):url);
+	         String signatureKey = URLEncoder.encode(mkmAppSecret,encode) + "&" + URLEncoder.encode(mkmAccessTokenSecret,encode);
+	         
+	         headerParams = new TreeMap<>();
+	         headerParams.put("oauth_consumer_key", mkmAppToken);
+	         headerParams.put("oauth_token", mkmAccessToken);
+	         headerParams.put("oauth_nonce", nonce);
+	         headerParams.put("oauth_timestamp", timestamp);
+	         headerParams.put("oauth_signature_method", signatureMethod);
+	         headerParams.put("oauth_version", version);
+	         headerParams.put("realm", baseUri);
+	         
+	         
+	         String baseString = method.toUpperCase()
+	                 + "&"
+	                 + URLEncoder.encode(baseUri, encode)
+	                 + "&";
+	         
+	        
+	         
+	         if (index > 0)
+	         {
+	             String urlParams = url.substring(index+1);
+	             Map<String,String> args = parseQueryString(urlParams);
+
+	             for (Entry<String, String> k : args.entrySet())
+	             {
+	            	 headerParams.put(k.getKey(), k.getValue());
+	            	 //logger.trace("headerParams.put("+k.getKey()+","+k.getValue()+")");
+	             }
+	         }
+	         
+	         for (Entry<String, String> k : headerParams.entrySet())
+	             if (!k.getKey().equalsIgnoreCase("realm"))
+	             {
+	            	 encodedParams.put(URLEncoder.encode(k.getKey(),encode), k.getValue());
+	            //	 logger.trace("encodedParams.put("+URLEncoder.encode(k.getKey(),encode)+","+k.getValue()+")");
+	             }
+	            
+	         List<String> paramStrings = new ArrayList<>();
+	        
+	         for(Entry<String, String> parameter:encodedParams.entrySet())
+	         {
+	        	 paramStrings.add(parameter.getKey() + "=" + parameter.getValue());
+	        	//7 logger.trace("paramStrings.add("+parameter.getKey()+"="+parameter.getValue()+")");
+	         }
+	         
+	         String paramString = URLEncoder.encode(Utilidades.join(paramStrings, "&"),encode).replaceAll("'", "%27");
+	         
+	       //  logger.trace("paramString="+paramString);
+	         baseString += paramString;
+	         
+	         Mac mac = Mac.getInstance("HmacSHA1");
+	         SecretKeySpec secret = new SecretKeySpec(signatureKey.getBytes(), mac.getAlgorithm());
+	         mac.init(secret);
+	         byte[] digest = mac.doFinal(baseString.getBytes());
+	         String oAuthSignature = DatatypeConverter.printBase64Binary(digest);    
+	         headerParams.put("oauth_signature", oAuthSignature);
+	         
+	         List<String> headerParamStrings = new ArrayList<>();
+	    
+	         for(Entry<String, String> parameter:headerParams.entrySet())
+	             headerParamStrings.add(parameter.getKey() + "=\"" + parameter.getValue() + "\"");
+	         
+	         String authHeader = "OAuth " + Utilidades.join(headerParamStrings,", ");
+	      //   logger.debug("authHeader="+authHeader);
+	     	return authHeader;
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		return null;
+	    	}
+	    }
+       
+       
        private String obtenerSignature(String requestURL, String tipoSignature) {
     	   try {
     	   String realm = requestURL ;
@@ -63,10 +173,10 @@ public class WebServiceCall {
            String oauth_consumer_key = mkmAppToken ;
            String oauth_token = mkmAccessToken ;
            String oauth_signature_method = "HMAC-SHA1" ;
-           // String oauth_timestamp = "" + (System.currentTimeMillis()/1000) ;
-           String oauth_timestamp = "1407917892" ;
-           // String oauth_nonce = "" + System.currentTimeMillis() ;
-           String oauth_nonce = "53eb1f44909d6" ;
+           String oauth_timestamp = "" + (System.currentTimeMillis()/1000) ;
+           //String oauth_timestamp = "1407917892" ;
+           String oauth_nonce = "" + System.currentTimeMillis() ;
+           //String oauth_nonce = "53eb1f44909d6" ;
 
 
            String encodedRequestURL = rawurlencode(requestURL) ;
@@ -128,7 +238,7 @@ public class WebServiceCall {
         	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
 
                connection = (HttpURLConnection) new URL(requestURL).openConnection();
-               connection.addRequestProperty("Authorization", obtenerSignature(requestURL, "GET")) ;
+               connection.addRequestProperty("Authorization", generateOAuthSignature2(requestURL, "GET")) ;
 
                connection.connect() ;
 
@@ -137,7 +247,8 @@ public class WebServiceCall {
 
                lastCode = connection.getResponseCode();
 
-               Utilidades.escribirLogInfo("Response Code is \"+lastCode", log);
+
+               Utilidades.escribirLogInfo("Response Code is \""+lastCode, log);
 
                if (200 == lastCode || 401 == lastCode || 404 == lastCode) {
                    BufferedReader rd = new BufferedReader(new InputStreamReader(lastCode==200?connection.getInputStream():connection.getErrorStream()));
@@ -185,17 +296,9 @@ public class WebServiceCall {
                connection.setDoOutput(true);
                connection.setRequestMethod("POST");
                connection.connect();
-
-
+               //le metemos en un Stream el objeto xml en UTF-8
                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-
-               JAXBContext jaxbContext = JAXBContext.newInstance(objetoPost.getClass());
-               java.io.StringWriter sw = new StringWriter();
-               Marshaller marshaller = jaxbContext.createMarshaller();
-               marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-               marshaller.marshal(objetoPost, sw);
-               String asd = sw.toString();
-               writer.write(asd);
+               writer.write(Utilidades.marshall(objetoPost, log));
                writer.close();
 
                // from here standard actions...

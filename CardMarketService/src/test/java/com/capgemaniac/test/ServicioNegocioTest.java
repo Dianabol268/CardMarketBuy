@@ -31,13 +31,13 @@ public class ServicioNegocioTest {
 		List<Map<String, Object>> listadoCartas = new ArrayList<Map<String, Object>>();
 		Map<String, Object> mapRaise = new HashMap<String, Object>();
 		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION, "mirrodin");
-		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "raise_the_alarm");
+		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "raise");
 		mapRaise.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL, false);
 		listadoCartas.add(mapRaise);
 
 		Map<String, Object> mapCaster = new HashMap<String, Object>();
 		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_EXPANSION, "innistrad");
-		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "snapcaster_mage");
+		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_NOMBRE, "sn");
 		mapCaster.put(InputObtenerPrecioColeccion.LISTADO_CARTAS_FOIL, false);
 		listadoCartas.add(mapCaster);
 
@@ -48,7 +48,7 @@ public class ServicioNegocioTest {
 
 		toIn.setListadoCartas(listadoCartas);
 
-//		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
+	OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
 
 //		WebServiceCall app = new WebServiceCall(null);
 //		 StringBuilder str = new StringBuilder();
@@ -59,8 +59,9 @@ public class ServicioNegocioTest {
 //			  Response salidaWebService = new Response();
 //			  System.out.println(app.responseContent());
 //		  }
-		WebServiceCall ws = new WebServiceCall(Logger.getLogger(ServicioNegocio.class.getName()));
-		ws.requestMKMGet("https://www.mkmapi.eu/ws/v1.1/stock");
+	
+//		WebServiceCall ws = new WebServiceCall(Logger.getLogger(ServicioNegocio.class.getName()));
+//		ws.requestMKMGet("https://api.cardmarket.com/ws/v2.0/stock");
 
 
 		Article carta = new Article();
@@ -68,7 +69,7 @@ public class ServicioNegocioTest {
 		carta.setCondition("NM");
 		carta.setIdLanguage(1);
 		carta.setCount(1);
-		carta.setPrice(25.5F);
+		carta.setPrice(255.5F);
 		carta.setComments("Intrducido desde api");
 		carta.setIsFoil(false);
 		carta.setIsPlayset(false);
@@ -78,7 +79,7 @@ public class ServicioNegocioTest {
 		SNAgregarColeccionVender sn = new SNAgregarColeccionVender();
 		InputAgregarColeccionVender toIn2 = new InputAgregarColeccionVender();
 		toIn2.setListaCartas(lista);
-		sn.llamadaServicio(toIn2);
+	//	sn.llamadaServicio(toIn2);
 	  }
 
 }
