@@ -184,8 +184,9 @@ public class WebServiceCall {
                connection.addRequestProperty("Authorization", obtenerSignature(requestURL)) ;
                connection.setDoOutput(true);
                connection.setRequestMethod("POST");
-               //connection.setRequestProperty("Content-Type", "application/xml");
-             //  OutputStream os = connection.getOutputStream();
+               connection.connect();
+
+
                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
 
                JAXBContext jaxbContext = JAXBContext.newInstance(objetoPost.getClass());
@@ -195,6 +196,7 @@ public class WebServiceCall {
                marshaller.marshal(objetoPost, sw);
                String asd = sw.toString();
                writer.write(asd);
+               writer.close();
 
                // from here standard actions...
                // read response code... read input stream.... close connection...
