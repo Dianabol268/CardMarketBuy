@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.capgemaxi.ServiciosNegocio.SNAgregarColeccionVender;
 import com.capgemaxi.ServiciosNegocio.SNObtenerPrecioColeccion;
+import com.capgemaxi.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaxi.ServiciosNegocio.TO.IN.InputAgregarColeccionVender;
 import com.capgemaxi.ServiciosNegocio.TO.IN.InputObtenerPrecioColeccion;
 import com.capgemaxi.ServiciosNegocio.TO.OUT.OutputObtenerPrecioColeccion;
@@ -46,7 +48,7 @@ public class ServicioNegocioTest {
 
 		toIn.setListadoCartas(listadoCartas);
 
-		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
+//		OutputObtenerPrecioColeccion toOut =  (OutputObtenerPrecioColeccion) servicio.llamadaServicio(toIn);
 
 //		WebServiceCall app = new WebServiceCall(null);
 //		 StringBuilder str = new StringBuilder();
@@ -57,6 +59,8 @@ public class ServicioNegocioTest {
 //			  Response salidaWebService = new Response();
 //			  System.out.println(app.responseContent());
 //		  }
+		WebServiceCall ws = new WebServiceCall(Logger.getLogger(ServicioNegocio.class.getName()));
+		ws.requestMKMGet("https://www.mkmapi.eu/ws/v1.1/stock");
 
 
 		Article carta = new Article();

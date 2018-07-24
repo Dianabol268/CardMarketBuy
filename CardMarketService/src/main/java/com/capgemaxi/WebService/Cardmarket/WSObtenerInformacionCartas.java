@@ -32,7 +32,7 @@ public class WSObtenerInformacionCartas {
 		 str.append("/");
 		 str.append("false");
 
-		  if (app.requestMKM(str.toString())) { //  game  lenguaje isexact
+		  if (app.requestMKMGet(str.toString())) { //  game  lenguaje isexact
 			  Response salidaWebService = new Response();
 			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService, log);
 
@@ -69,7 +69,7 @@ public class WSObtenerInformacionCartas {
 		 str.append("https://www.mkmapi.eu/ws/v1.1/product/");
 		 str.append(id);
 
-		  if (app.requestMKM(str.toString())) {
+		  if (app.requestMKMGet(str.toString())) {
 			  Response salidaWebService = new Response();
 			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService, log);
 
