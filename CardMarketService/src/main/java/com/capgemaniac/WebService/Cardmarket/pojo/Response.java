@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.8-b130911.1802 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2018.07.18 a las 11:35:15 AM CEST 
+// Generado el: 2018.07.25 a las 11:36:20 AM CEST 
 //
 
 
@@ -32,18 +32,19 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *                   &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}byte"/>
  *                   &lt;element name="idMetaproduct" type="{http://www.w3.org/2001/XMLSchema}short"/>
- *                   &lt;element name="idGame" type="{http://www.w3.org/2001/XMLSchema}byte"/>
- *                   &lt;element name="countReprints" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *                   &lt;element name="name" maxOccurs="unbounded" minOccurs="0">
+ *                   &lt;element name="countReprints" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *                   &lt;element name="enName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="locName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="localization" maxOccurs="unbounded" minOccurs="0">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           &lt;sequence>
+ *                             &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                             &lt;element name="idLanguage" type="{http://www.w3.org/2001/XMLSchema}byte"/>
  *                             &lt;element name="languageName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *                             &lt;element name="productName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                           &lt;/sequence>
  *                         &lt;/restriction>
  *                       &lt;/complexContent>
@@ -51,13 +52,19 @@ import javax.xml.bind.annotation.XmlType;
  *                   &lt;/element>
  *                   &lt;element name="website" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                   &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *                   &lt;element name="category">
+ *                   &lt;element name="gameName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="idGame" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *                   &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *                   &lt;element name="rarity" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="expansion">
  *                     &lt;complexType>
  *                       &lt;complexContent>
  *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                           &lt;sequence>
- *                             &lt;element name="idCategory" type="{http://www.w3.org/2001/XMLSchema}byte"/>
- *                             &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                             &lt;element name="idExpansion" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *                             &lt;element name="enName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                             &lt;element name="expansionIcon" type="{http://www.w3.org/2001/XMLSchema}byte"/>
  *                           &lt;/sequence>
  *                         &lt;/restriction>
  *                       &lt;/complexContent>
@@ -79,10 +86,34 @@ import javax.xml.bind.annotation.XmlType;
  *                       &lt;/complexContent>
  *                     &lt;/complexType>
  *                   &lt;/element>
- *                   &lt;element name="expansion" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *                   &lt;element name="expIcon" type="{http://www.w3.org/2001/XMLSchema}short"/>
- *                   &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *                   &lt;element name="rarity" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *                   &lt;element name="reprint" maxOccurs="unbounded" minOccurs="0">
+ *                     &lt;complexType>
+ *                       &lt;complexContent>
+ *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                           &lt;sequence>
+ *                             &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *                             &lt;element name="expansion" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                             &lt;element name="expIcon" type="{http://www.w3.org/2001/XMLSchema}short"/>
+ *                           &lt;/sequence>
+ *                         &lt;/restriction>
+ *                       &lt;/complexContent>
+ *                     &lt;/complexType>
+ *                   &lt;/element>
+ *                   &lt;element name="countArticles" type="{http://www.w3.org/2001/XMLSchema}short"/>
+ *                   &lt;element name="countFoils" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *                   &lt;element name="links" maxOccurs="unbounded" minOccurs="0">
+ *                     &lt;complexType>
+ *                       &lt;complexContent>
+ *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *                           &lt;sequence>
+ *                             &lt;element name="rel" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                             &lt;element name="href" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                             &lt;element name="method" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                           &lt;/sequence>
+ *                         &lt;/restriction>
+ *                       &lt;/complexContent>
+ *                     &lt;/complexType>
+ *                   &lt;/element>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -145,18 +176,19 @@ public class Response {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}int"/>
+     *         &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}byte"/>
      *         &lt;element name="idMetaproduct" type="{http://www.w3.org/2001/XMLSchema}short"/>
-     *         &lt;element name="idGame" type="{http://www.w3.org/2001/XMLSchema}byte"/>
-     *         &lt;element name="countReprints" type="{http://www.w3.org/2001/XMLSchema}string"/>
-     *         &lt;element name="name" maxOccurs="unbounded" minOccurs="0">
+     *         &lt;element name="countReprints" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+     *         &lt;element name="enName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="locName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="localization" maxOccurs="unbounded" minOccurs="0">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 &lt;sequence>
+     *                   &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *                   &lt;element name="idLanguage" type="{http://www.w3.org/2001/XMLSchema}byte"/>
      *                   &lt;element name="languageName" type="{http://www.w3.org/2001/XMLSchema}string"/>
-     *                   &lt;element name="productName" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *                 &lt;/sequence>
      *               &lt;/restriction>
      *             &lt;/complexContent>
@@ -164,13 +196,19 @@ public class Response {
      *         &lt;/element>
      *         &lt;element name="website" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
-     *         &lt;element name="category">
+     *         &lt;element name="gameName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="idGame" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+     *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+     *         &lt;element name="rarity" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="expansion">
      *           &lt;complexType>
      *             &lt;complexContent>
      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *                 &lt;sequence>
-     *                   &lt;element name="idCategory" type="{http://www.w3.org/2001/XMLSchema}byte"/>
-     *                   &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *                   &lt;element name="idExpansion" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+     *                   &lt;element name="enName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *                   &lt;element name="expansionIcon" type="{http://www.w3.org/2001/XMLSchema}byte"/>
      *                 &lt;/sequence>
      *               &lt;/restriction>
      *             &lt;/complexContent>
@@ -192,10 +230,34 @@ public class Response {
      *             &lt;/complexContent>
      *           &lt;/complexType>
      *         &lt;/element>
-     *         &lt;element name="expansion" type="{http://www.w3.org/2001/XMLSchema}string"/>
-     *         &lt;element name="expIcon" type="{http://www.w3.org/2001/XMLSchema}short"/>
-     *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
-     *         &lt;element name="rarity" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+     *         &lt;element name="reprint" maxOccurs="unbounded" minOccurs="0">
+     *           &lt;complexType>
+     *             &lt;complexContent>
+     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *                 &lt;sequence>
+     *                   &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}int"/>
+     *                   &lt;element name="expansion" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *                   &lt;element name="expIcon" type="{http://www.w3.org/2001/XMLSchema}short"/>
+     *                 &lt;/sequence>
+     *               &lt;/restriction>
+     *             &lt;/complexContent>
+     *           &lt;/complexType>
+     *         &lt;/element>
+     *         &lt;element name="countArticles" type="{http://www.w3.org/2001/XMLSchema}short"/>
+     *         &lt;element name="countFoils" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+     *         &lt;element name="links" maxOccurs="unbounded" minOccurs="0">
+     *           &lt;complexType>
+     *             &lt;complexContent>
+     *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *                 &lt;sequence>
+     *                   &lt;element name="rel" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *                   &lt;element name="href" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *                   &lt;element name="method" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *                 &lt;/sequence>
+     *               &lt;/restriction>
+     *             &lt;/complexContent>
+     *           &lt;/complexType>
+     *         &lt;/element>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -208,45 +270,60 @@ public class Response {
     @XmlType(name = "", propOrder = {
         "idProduct",
         "idMetaproduct",
-        "idGame",
         "countReprints",
-        "name",
+        "enName",
+        "locName",
+        "localization",
         "website",
         "image",
-        "category",
-        "priceGuide",
-        "expansion",
-        "expIcon",
+        "gameName",
+        "categoryName",
+        "idGame",
         "number",
-        "rarity"
+        "rarity",
+        "expansion",
+        "priceGuide",
+        "reprint",
+        "countArticles",
+        "countFoils",
+        "links"
     })
     public static class Product {
 
-        protected int idProduct;
+        protected byte idProduct;
         protected short idMetaproduct;
-        protected byte idGame;
+        protected byte countReprints;
         @XmlElement(required = true)
-        protected String countReprints;
-        protected List<Response.Product.Name> name;
+        protected String enName;
+        @XmlElement(required = true)
+        protected String locName;
+        protected List<Response.Product.Localization> localization;
         @XmlElement(required = true)
         protected String website;
         @XmlElement(required = true)
         protected String image;
         @XmlElement(required = true)
-        protected Response.Product.Category category;
+        protected String gameName;
+        @XmlElement(required = true)
+        protected String categoryName;
+        protected byte idGame;
+        protected byte number;
+        @XmlElement(required = true)
+        protected String rarity;
+        @XmlElement(required = true)
+        protected Response.Product.Expansion expansion;
         @XmlElement(required = true)
         protected Response.Product.PriceGuide priceGuide;
-        @XmlElement(required = true)
-        protected String expansion;
-        protected short expIcon;
-        protected String number;
-        protected String rarity;
+        protected List<Response.Product.Reprint> reprint;
+        protected short countArticles;
+        protected byte countFoils;
+        protected List<Response.Product.Links> links;
 
         /**
          * Obtiene el valor de la propiedad idProduct.
          * 
          */
-        public int getIdProduct() {
+        public byte getIdProduct() {
             return idProduct;
         }
 
@@ -254,7 +331,7 @@ public class Response {
          * Define el valor de la propiedad idProduct.
          * 
          */
-        public void setIdProduct(int value) {
+        public void setIdProduct(byte value) {
             this.idProduct = value;
         }
 
@@ -275,72 +352,96 @@ public class Response {
         }
 
         /**
-         * Obtiene el valor de la propiedad idGame.
-         * 
-         */
-        public byte getIdGame() {
-            return idGame;
-        }
-
-        /**
-         * Define el valor de la propiedad idGame.
-         * 
-         */
-        public void setIdGame(byte value) {
-            this.idGame = value;
-        }
-
-        /**
          * Obtiene el valor de la propiedad countReprints.
          * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
          */
-        public String getCountReprints() {
+        public byte getCountReprints() {
             return countReprints;
         }
 
         /**
          * Define el valor de la propiedad countReprints.
          * 
+         */
+        public void setCountReprints(byte value) {
+            this.countReprints = value;
+        }
+
+        /**
+         * Obtiene el valor de la propiedad enName.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getEnName() {
+            return enName;
+        }
+
+        /**
+         * Define el valor de la propiedad enName.
+         * 
          * @param value
          *     allowed object is
          *     {@link String }
          *     
          */
-        public void setCountReprints(String value) {
-            this.countReprints = value;
+        public void setEnName(String value) {
+            this.enName = value;
         }
 
         /**
-         * Gets the value of the name property.
+         * Obtiene el valor de la propiedad locName.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getLocName() {
+            return locName;
+        }
+
+        /**
+         * Define el valor de la propiedad locName.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setLocName(String value) {
+            this.locName = value;
+        }
+
+        /**
+         * Gets the value of the localization property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the name property.
+         * This is why there is not a <CODE>set</CODE> method for the localization property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getName().add(newItem);
+         *    getLocalization().add(newItem);
          * </pre>
          * 
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link Response.Product.Name }
+         * {@link Response.Product.Localization }
          * 
          * 
          */
-        public List<Response.Product.Name> getName() {
-            if (name == null) {
-                name = new ArrayList<Response.Product.Name>();
+        public List<Response.Product.Localization> getLocalization() {
+            if (localization == null) {
+                localization = new ArrayList<Response.Product.Localization>();
             }
-            return this.name;
+            return this.localization;
         }
 
         /**
@@ -392,114 +493,82 @@ public class Response {
         }
 
         /**
-         * Obtiene el valor de la propiedad category.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Response.Product.Category }
-         *     
-         */
-        public Response.Product.Category getCategory() {
-            return category;
-        }
-
-        /**
-         * Define el valor de la propiedad category.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Response.Product.Category }
-         *     
-         */
-        public void setCategory(Response.Product.Category value) {
-            this.category = value;
-        }
-
-        /**
-         * Obtiene el valor de la propiedad priceGuide.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Response.Product.PriceGuide }
-         *     
-         */
-        public Response.Product.PriceGuide getPriceGuide() {
-            return priceGuide;
-        }
-
-        /**
-         * Define el valor de la propiedad priceGuide.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Response.Product.PriceGuide }
-         *     
-         */
-        public void setPriceGuide(Response.Product.PriceGuide value) {
-            this.priceGuide = value;
-        }
-
-        /**
-         * Obtiene el valor de la propiedad expansion.
+         * Obtiene el valor de la propiedad gameName.
          * 
          * @return
          *     possible object is
          *     {@link String }
          *     
          */
-        public String getExpansion() {
-            return expansion;
+        public String getGameName() {
+            return gameName;
         }
 
         /**
-         * Define el valor de la propiedad expansion.
+         * Define el valor de la propiedad gameName.
          * 
          * @param value
          *     allowed object is
          *     {@link String }
          *     
          */
-        public void setExpansion(String value) {
-            this.expansion = value;
+        public void setGameName(String value) {
+            this.gameName = value;
         }
 
         /**
-         * Obtiene el valor de la propiedad expIcon.
+         * Obtiene el valor de la propiedad categoryName.
          * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
          */
-        public short getExpIcon() {
-            return expIcon;
+        public String getCategoryName() {
+            return categoryName;
         }
 
         /**
-         * Define el valor de la propiedad expIcon.
+         * Define el valor de la propiedad categoryName.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setCategoryName(String value) {
+            this.categoryName = value;
+        }
+
+        /**
+         * Obtiene el valor de la propiedad idGame.
          * 
          */
-        public void setExpIcon(short value) {
-            this.expIcon = value;
+        public byte getIdGame() {
+            return idGame;
+        }
+
+        /**
+         * Define el valor de la propiedad idGame.
+         * 
+         */
+        public void setIdGame(byte value) {
+            this.idGame = value;
         }
 
         /**
          * Obtiene el valor de la propiedad number.
          * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
          */
-        public String getNumber() {
+        public byte getNumber() {
             return number;
         }
 
         /**
          * Define el valor de la propiedad number.
          * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
          */
-        public void setNumber(String value) {
+        public void setNumber(byte value) {
             this.number = value;
         }
 
@@ -527,6 +596,144 @@ public class Response {
             this.rarity = value;
         }
 
+        /**
+         * Obtiene el valor de la propiedad expansion.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Response.Product.Expansion }
+         *     
+         */
+        public Response.Product.Expansion getExpansion() {
+            return expansion;
+        }
+
+        /**
+         * Define el valor de la propiedad expansion.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Response.Product.Expansion }
+         *     
+         */
+        public void setExpansion(Response.Product.Expansion value) {
+            this.expansion = value;
+        }
+
+        /**
+         * Obtiene el valor de la propiedad priceGuide.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Response.Product.PriceGuide }
+         *     
+         */
+        public Response.Product.PriceGuide getPriceGuide() {
+            return priceGuide;
+        }
+
+        /**
+         * Define el valor de la propiedad priceGuide.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Response.Product.PriceGuide }
+         *     
+         */
+        public void setPriceGuide(Response.Product.PriceGuide value) {
+            this.priceGuide = value;
+        }
+
+        /**
+         * Gets the value of the reprint property.
+         * 
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the reprint property.
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getReprint().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Response.Product.Reprint }
+         * 
+         * 
+         */
+        public List<Response.Product.Reprint> getReprint() {
+            if (reprint == null) {
+                reprint = new ArrayList<Response.Product.Reprint>();
+            }
+            return this.reprint;
+        }
+
+        /**
+         * Obtiene el valor de la propiedad countArticles.
+         * 
+         */
+        public short getCountArticles() {
+            return countArticles;
+        }
+
+        /**
+         * Define el valor de la propiedad countArticles.
+         * 
+         */
+        public void setCountArticles(short value) {
+            this.countArticles = value;
+        }
+
+        /**
+         * Obtiene el valor de la propiedad countFoils.
+         * 
+         */
+        public byte getCountFoils() {
+            return countFoils;
+        }
+
+        /**
+         * Define el valor de la propiedad countFoils.
+         * 
+         */
+        public void setCountFoils(byte value) {
+            this.countFoils = value;
+        }
+
+        /**
+         * Gets the value of the links property.
+         * 
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the links property.
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getLinks().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Response.Product.Links }
+         * 
+         * 
+         */
+        public List<Response.Product.Links> getLinks() {
+            if (links == null) {
+                links = new ArrayList<Response.Product.Links>();
+            }
+            return this.links;
+        }
+
 
         /**
          * <p>Clase Java para anonymous complex type.
@@ -538,8 +745,9 @@ public class Response {
          *   &lt;complexContent>
          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       &lt;sequence>
-         *         &lt;element name="idCategory" type="{http://www.w3.org/2001/XMLSchema}byte"/>
-         *         &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="idExpansion" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+         *         &lt;element name="enName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="expansionIcon" type="{http://www.w3.org/2001/XMLSchema}byte"/>
          *       &lt;/sequence>
          *     &lt;/restriction>
          *   &lt;/complexContent>
@@ -550,53 +758,71 @@ public class Response {
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
-            "idCategory",
-            "categoryName"
+            "idExpansion",
+            "enName",
+            "expansionIcon"
         })
-        public static class Category {
+        public static class Expansion {
 
-            protected byte idCategory;
+            protected byte idExpansion;
             @XmlElement(required = true)
-            protected String categoryName;
+            protected String enName;
+            protected byte expansionIcon;
 
             /**
-             * Obtiene el valor de la propiedad idCategory.
+             * Obtiene el valor de la propiedad idExpansion.
              * 
              */
-            public byte getIdCategory() {
-                return idCategory;
+            public byte getIdExpansion() {
+                return idExpansion;
             }
 
             /**
-             * Define el valor de la propiedad idCategory.
+             * Define el valor de la propiedad idExpansion.
              * 
              */
-            public void setIdCategory(byte value) {
-                this.idCategory = value;
+            public void setIdExpansion(byte value) {
+                this.idExpansion = value;
             }
 
             /**
-             * Obtiene el valor de la propiedad categoryName.
+             * Obtiene el valor de la propiedad enName.
              * 
              * @return
              *     possible object is
              *     {@link String }
              *     
              */
-            public String getCategoryName() {
-                return categoryName;
+            public String getEnName() {
+                return enName;
             }
 
             /**
-             * Define el valor de la propiedad categoryName.
+             * Define el valor de la propiedad enName.
              * 
              * @param value
              *     allowed object is
              *     {@link String }
              *     
              */
-            public void setCategoryName(String value) {
-                this.categoryName = value;
+            public void setEnName(String value) {
+                this.enName = value;
+            }
+
+            /**
+             * Obtiene el valor de la propiedad expansionIcon.
+             * 
+             */
+            public byte getExpansionIcon() {
+                return expansionIcon;
+            }
+
+            /**
+             * Define el valor de la propiedad expansionIcon.
+             * 
+             */
+            public void setExpansionIcon(byte value) {
+                this.expansionIcon = value;
             }
 
         }
@@ -612,9 +838,9 @@ public class Response {
          *   &lt;complexContent>
          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
          *       &lt;sequence>
-         *         &lt;element name="idLanguage" type="{http://www.w3.org/2001/XMLSchema}byte"/>
-         *         &lt;element name="languageName" type="{http://www.w3.org/2001/XMLSchema}string"/>
-         *         &lt;element name="productName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="rel" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="href" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="method" type="{http://www.w3.org/2001/XMLSchema}string"/>
          *       &lt;/sequence>
          *     &lt;/restriction>
          *   &lt;/complexContent>
@@ -625,17 +851,152 @@ public class Response {
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
-            "idLanguage",
-            "languageName",
-            "productName"
+            "rel",
+            "href",
+            "method"
         })
-        public static class Name {
+        public static class Links {
 
+            @XmlElement(required = true)
+            protected String rel;
+            @XmlElement(required = true)
+            protected String href;
+            @XmlElement(required = true)
+            protected String method;
+
+            /**
+             * Obtiene el valor de la propiedad rel.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getRel() {
+                return rel;
+            }
+
+            /**
+             * Define el valor de la propiedad rel.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setRel(String value) {
+                this.rel = value;
+            }
+
+            /**
+             * Obtiene el valor de la propiedad href.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getHref() {
+                return href;
+            }
+
+            /**
+             * Define el valor de la propiedad href.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setHref(String value) {
+                this.href = value;
+            }
+
+            /**
+             * Obtiene el valor de la propiedad method.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getMethod() {
+                return method;
+            }
+
+            /**
+             * Define el valor de la propiedad method.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setMethod(String value) {
+                this.method = value;
+            }
+
+        }
+
+
+        /**
+         * <p>Clase Java para anonymous complex type.
+         * 
+         * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+         * 
+         * <pre>
+         * &lt;complexType>
+         *   &lt;complexContent>
+         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *       &lt;sequence>
+         *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="idLanguage" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+         *         &lt;element name="languageName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *       &lt;/sequence>
+         *     &lt;/restriction>
+         *   &lt;/complexContent>
+         * &lt;/complexType>
+         * </pre>
+         * 
+         * 
+         */
+        @XmlAccessorType(XmlAccessType.FIELD)
+        @XmlType(name = "", propOrder = {
+            "name",
+            "idLanguage",
+            "languageName"
+        })
+        public static class Localization {
+
+            @XmlElement(required = true)
+            protected String name;
             protected byte idLanguage;
             @XmlElement(required = true)
             protected String languageName;
-            @XmlElement(required = true)
-            protected String productName;
+
+            /**
+             * Obtiene el valor de la propiedad name.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getName() {
+                return name;
+            }
+
+            /**
+             * Define el valor de la propiedad name.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setName(String value) {
+                this.name = value;
+            }
 
             /**
              * Obtiene el valor de la propiedad idLanguage.
@@ -675,30 +1036,6 @@ public class Response {
              */
             public void setLanguageName(String value) {
                 this.languageName = value;
-            }
-
-            /**
-             * Obtiene el valor de la propiedad productName.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getProductName() {
-                return productName;
-            }
-
-            /**
-             * Define el valor de la propiedad productName.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setProductName(String value) {
-                this.productName = value;
             }
 
         }
@@ -846,6 +1183,99 @@ public class Response {
              */
             public void setTREND(float value) {
                 this.trend = value;
+            }
+
+        }
+
+
+        /**
+         * <p>Clase Java para anonymous complex type.
+         * 
+         * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+         * 
+         * <pre>
+         * &lt;complexType>
+         *   &lt;complexContent>
+         *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+         *       &lt;sequence>
+         *         &lt;element name="idProduct" type="{http://www.w3.org/2001/XMLSchema}int"/>
+         *         &lt;element name="expansion" type="{http://www.w3.org/2001/XMLSchema}string"/>
+         *         &lt;element name="expIcon" type="{http://www.w3.org/2001/XMLSchema}short"/>
+         *       &lt;/sequence>
+         *     &lt;/restriction>
+         *   &lt;/complexContent>
+         * &lt;/complexType>
+         * </pre>
+         * 
+         * 
+         */
+        @XmlAccessorType(XmlAccessType.FIELD)
+        @XmlType(name = "", propOrder = {
+            "idProduct",
+            "expansion",
+            "expIcon"
+        })
+        public static class Reprint {
+
+            protected int idProduct;
+            @XmlElement(required = true)
+            protected String expansion;
+            protected short expIcon;
+
+            /**
+             * Obtiene el valor de la propiedad idProduct.
+             * 
+             */
+            public int getIdProduct() {
+                return idProduct;
+            }
+
+            /**
+             * Define el valor de la propiedad idProduct.
+             * 
+             */
+            public void setIdProduct(int value) {
+                this.idProduct = value;
+            }
+
+            /**
+             * Obtiene el valor de la propiedad expansion.
+             * 
+             * @return
+             *     possible object is
+             *     {@link String }
+             *     
+             */
+            public String getExpansion() {
+                return expansion;
+            }
+
+            /**
+             * Define el valor de la propiedad expansion.
+             * 
+             * @param value
+             *     allowed object is
+             *     {@link String }
+             *     
+             */
+            public void setExpansion(String value) {
+                this.expansion = value;
+            }
+
+            /**
+             * Obtiene el valor de la propiedad expIcon.
+             * 
+             */
+            public short getExpIcon() {
+                return expIcon;
+            }
+
+            /**
+             * Define el valor de la propiedad expIcon.
+             * 
+             */
+            public void setExpIcon(short value) {
+                this.expIcon = value;
             }
 
         }

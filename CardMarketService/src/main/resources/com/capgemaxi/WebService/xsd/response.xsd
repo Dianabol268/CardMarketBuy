@@ -5,26 +5,33 @@
         <xs:element name="product" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element type="xs:int" name="idProduct"/>
+              <xs:element type="xs:byte" name="idProduct"/>
               <xs:element type="xs:short" name="idMetaproduct"/>
-              <xs:element type="xs:byte" name="idGame"/>
-              <xs:element type="xs:string" name="countReprints"/>
-              <xs:element name="name" maxOccurs="unbounded" minOccurs="0">
+              <xs:element type="xs:byte" name="countReprints"/>
+              <xs:element type="xs:string" name="enName"/>
+              <xs:element type="xs:string" name="locName"/>
+              <xs:element name="localization" maxOccurs="unbounded" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
+                    <xs:element type="xs:string" name="name"/>
                     <xs:element type="xs:byte" name="idLanguage"/>
                     <xs:element type="xs:string" name="languageName"/>
-                    <xs:element type="xs:string" name="productName"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
               <xs:element type="xs:string" name="website"/>
               <xs:element type="xs:string" name="image"/>
-              <xs:element name="category">
+              <xs:element type="xs:string" name="gameName"/>
+              <xs:element type="xs:string" name="categoryName"/>
+              <xs:element type="xs:byte" name="idGame"/>
+              <xs:element type="xs:byte" name="number"/>
+              <xs:element type="xs:string" name="rarity"/>
+              <xs:element name="expansion">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element type="xs:byte" name="idCategory"/>
-                    <xs:element type="xs:string" name="categoryName"/>
+                    <xs:element type="xs:byte" name="idExpansion"/>
+                    <xs:element type="xs:string" name="enName"/>
+                    <xs:element type="xs:byte" name="expansionIcon"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -40,10 +47,26 @@
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element type="xs:string" name="expansion"/>
-              <xs:element type="xs:short" name="expIcon"/>
-              <xs:element type="xs:string" name="number" minOccurs="0"/>
-              <xs:element type="xs:string" name="rarity" minOccurs="0"/>
+              <xs:element name="reprint" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:int" name="idProduct"/>
+                    <xs:element type="xs:string" name="expansion"/>
+                    <xs:element type="xs:short" name="expIcon"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:short" name="countArticles"/>
+              <xs:element type="xs:byte" name="countFoils"/>
+              <xs:element name="links" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="rel"/>
+                    <xs:element type="xs:string" name="href"/>
+                    <xs:element type="xs:string" name="method"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

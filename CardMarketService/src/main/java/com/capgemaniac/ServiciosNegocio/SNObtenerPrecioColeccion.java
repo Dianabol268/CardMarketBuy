@@ -91,12 +91,12 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 	private BigDecimal obtenerPrecioMinimoProducto(Product producto, boolean esFoil) {
 		if(!Utilidades.isNull(producto)) {
 			if(esFoil) {
-				Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getName().get(0).getProductName() + " - "
+				Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getEnName() + " - "
 						  + producto.getPriceGuide().getLOWFOIL() + " euros", log);
 				  return Utilidades.getBigDecimalFromFloat(producto.getPriceGuide().getLOWFOIL());
 			  }
 			  else {
-				  Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getName().get(0).getProductName() + " - "
+				  Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getEnName() + " - "
 						  + producto.getPriceGuide().getLOW() + " euros", log);
 				  return Utilidades.getBigDecimalFromFloat(producto.getPriceGuide().getLOW());
 			  }

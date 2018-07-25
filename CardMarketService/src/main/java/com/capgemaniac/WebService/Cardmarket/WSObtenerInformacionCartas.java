@@ -41,10 +41,7 @@ public class WSObtenerInformacionCartas {
 				  if(!Utilidades.isNull(producto)) {
 					  //si coincide la expansion...
 
-					  if(expansion.toLowerCase().equals(producto.getExpansion().toLowerCase())) {
-							  return producto;
-
-					  }
+					  //TODO revisar bien
 				  }
 			  }
 
@@ -55,7 +52,7 @@ public class WSObtenerInformacionCartas {
 	}
 
 	/**
-	 * devuelve el producto,por el ID. 
+	 * devuelve el producto,por el ID.
 	 * @param log
 	 * @param carta
 	 * @param idioma
