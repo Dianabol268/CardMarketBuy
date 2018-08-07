@@ -3,6 +3,8 @@ package com.capgemaniac.ServiciosNegocio;
 import com.capgemaniac.ServiciosNegocio.Arquitectura.OutputServicioNegocio;
 import com.capgemaniac.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaniac.ServiciosNegocio.TO.IN.InputBuscarArticulo;
+import com.capgemaniac.ServiciosNegocio.TO.OUT.OutputBuscarArticulo;
+import com.capgemaniac.WebService.Cardmarket.WSObtenerInformacionCartas;
 import com.capgemaniac.util.Utilidades;
 
 public class SNBuscarArticulo extends ServicioNegocio{
@@ -12,7 +14,10 @@ public class SNBuscarArticulo extends ServicioNegocio{
 		Utilidades.escribirLogInfo("Inicio- SNBuscarArticulo", log);
 		InputBuscarArticulo entrada = (InputBuscarArticulo) this.getEntradaServicio();
 
-		return null;
+		OutputBuscarArticulo salida = new OutputBuscarArticulo();
+		salida.setListaProductos(WSObtenerInformacionCartas.buscarCarta(entrada.getNombreCarta(), entrada.getJuego(), entrada.getIdioma(), log));
+		Utilidades.escribirLogInfo("Final- SNBuscarArticulo", log);
+		return salida;
 	}
 
 	@Override
