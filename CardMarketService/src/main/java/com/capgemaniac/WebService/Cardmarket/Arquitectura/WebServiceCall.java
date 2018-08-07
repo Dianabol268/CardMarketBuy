@@ -1,18 +1,13 @@
 package com.capgemaniac.WebService.Cardmarket.Arquitectura;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,10 +18,7 @@ import java.util.logging.Logger;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 
-import com.capgemaniac.WebService.Cardmarket.pojo.Request;
 import com.capgemaniac.util.Utilidades;
 
 /**
@@ -163,7 +155,14 @@ public class WebServiceCall {
 	    	}
 	    }
 
-
+       /**
+        * metodo antiguo sin uso para obtener la firma de la cabecera del paquete
+        * @param requestURL
+        * @param tipoSignature
+        * @return
+        */
+       @SuppressWarnings("unused")
+	@Deprecated
        private String obtenerSignature(String requestURL, String tipoSignature) {
     	   try {
     	   String realm = requestURL ;

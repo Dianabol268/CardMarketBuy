@@ -1,6 +1,5 @@
 package com.capgemaniac.ServiciosNegocio.Arquitectura;
 
-import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,8 +54,8 @@ public abstract class ServicioNegocio {
 
 			log.log(Level.SEVERE, "Detalles del error: "+ error.getMessage() +
 					"////Causa: " + error.getCause());
-			
-			//TODO rollback base de datos 
+
+			//TODO rollback base de datos
 			//devolvemos el error
 			 salida = new OutputServicioNegocio() ;
 			 salida.setError(error);

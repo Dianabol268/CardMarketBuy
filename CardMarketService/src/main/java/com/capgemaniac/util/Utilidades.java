@@ -1,9 +1,6 @@
 package com.capgemaniac.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
@@ -11,8 +8,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import com.capgemaniac.ServiciosNegocio.Arquitectura.ServicioNegocio;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -29,7 +24,7 @@ public final class Utilidades {
 	        while (iter.hasNext()) {
 	            builder.append(iter.next());
 	            if (!iter.hasNext()) {
-	              break;                  
+	              break;
 	            }
 	            builder.append(delimiter);
 	        }
@@ -71,13 +66,13 @@ public final class Utilidades {
 		}
 		return true;
 	}
-	
+
 	/**
-	 *  Metodo que realiza la conversion de un objeto Java a un String 
+	 *  Metodo que realiza la conversion de un objeto Java a un String
 	 */
 	public static String marshall(Object objeto, Logger log) {
-		
-		  JAXBContext jaxbContext;		  
+
+		  JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(objeto.getClass());
 			java.io.StringWriter sw = new StringWriter();
@@ -85,15 +80,15 @@ public final class Utilidades {
 	          marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 	          marshaller.marshal(objeto, sw);
 	         return sw.toString();
-		} 
-              
+		}
+
          catch (JAXBException error) {
         	 log.log(Level.SEVERE, "Error haciendo el marshall a xml: Detalles del error: "+ error.getMessage() +
 						"////Causa: " + error.getCause());
  		}
 		return null;
 	}
-	
+
 	/**
 	 *Metodo que te rellena un Objeto con un xml de entrada
 	 * @param <JAXBContext>
@@ -114,7 +109,7 @@ public final class Utilidades {
 		return objeto;
 	}
 
-	
+
 
 	  /**
 	  * Converts a Double to BigDecimal in the most efficient and accurate manner

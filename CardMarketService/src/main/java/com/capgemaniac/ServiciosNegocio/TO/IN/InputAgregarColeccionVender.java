@@ -3,7 +3,6 @@ package com.capgemaniac.ServiciosNegocio.TO.IN;
 import java.util.List;
 
 import com.capgemaniac.ServiciosNegocio.Arquitectura.InputServicioNegocio;
-import com.capgemaniac.WebService.Cardmarket.pojo.Request;
 import com.capgemaniac.WebService.Cardmarket.pojo.Request.Article;
 
 public class InputAgregarColeccionVender extends InputServicioNegocio{
