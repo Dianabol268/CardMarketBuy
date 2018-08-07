@@ -60,7 +60,7 @@ public class SNAgregarColeccionVender extends ServicioNegocio{
 //	</request>
 
 	private boolean validarInfo(Article cartaAInsertar) {
-
+		//TODO
 		return true;
 	}
 
@@ -68,7 +68,7 @@ public class SNAgregarColeccionVender extends ServicioNegocio{
 
 	@Override
 	protected void setIdServicio(int idServicio) {
-		this.setIdServicio(2);
+		this.idServicio=2;
 
 	}
 
