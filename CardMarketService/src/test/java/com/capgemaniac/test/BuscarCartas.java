@@ -14,7 +14,7 @@ public class BuscarCartas {
 	  public void evaluatesExpression() {
 		SNBuscarArticulo servicio = new SNBuscarArticulo();
 		InputBuscarArticulo toIn = new InputBuscarArticulo();
-		toIn.setNombreCarta("liliana");
+		toIn.setNombreCarta("ad_nauseam");
 		toIn.setIdioma(1);
 		toIn.setJuego(1);
 		OutputBuscarArticulo toOut = (OutputBuscarArticulo) servicio.llamadaServicio(toIn);
