@@ -14,9 +14,10 @@ public class BuscarCartas {
 	  public void evaluatesExpression() {
 		SNBuscarArticulo servicio = new SNBuscarArticulo();
 		InputBuscarArticulo toIn = new InputBuscarArticulo();
-		toIn.setNombreCarta("ad_nauseam");
+		toIn.setNombreCarta("tarmogoyf");
 		toIn.setIdioma(1);
 		toIn.setJuego(1);
+		toIn.setExpansion("futuresight");
 		OutputBuscarArticulo toOut = (OutputBuscarArticulo) servicio.llamadaServicio(toIn);
 		for(Product producto : toOut.getListaProductos()) {
 			System.out.println(producto.getEnName());

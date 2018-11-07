@@ -282,6 +282,7 @@ public class Response {
         "number",
         "rarity",
         "expansion",
+        "expansionName",
         "priceGuide",
         "reprint",
         "countArticles",
@@ -312,6 +313,8 @@ public class Response {
         protected String rarity;
         @XmlElement(required = true)
         protected Response.Product.Expansion expansion;
+        @XmlElement(required = true)
+        protected String expansionName;
         @XmlElement(required = true)
         protected Response.Product.PriceGuide priceGuide;
         protected List<Response.Product.Reprint> reprint;
@@ -618,6 +621,30 @@ public class Response {
          */
         public void setExpansion(Response.Product.Expansion value) {
             this.expansion = value;
+        }
+        
+        /**
+         * Obtiene el valor de la propiedad expansion.
+         * 
+         * @return
+         *     possible object is
+         *     {@link Response.Product.Expansion }
+         *     
+         */
+        public String getExpansionName() {
+            return expansionName;
+        }
+
+        /**
+         * Define el valor de la propiedad expansion.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link Response.Product.Expansion }
+         *     
+         */
+        public void setExpansionName(String value) {
+            this.expansionName = value;
         }
 
         /**

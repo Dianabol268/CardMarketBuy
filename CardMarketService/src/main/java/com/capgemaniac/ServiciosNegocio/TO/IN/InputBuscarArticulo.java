@@ -5,6 +5,7 @@ import com.capgemaniac.ServiciosNegocio.Arquitectura.InputServicioNegocio;
 public class InputBuscarArticulo extends InputServicioNegocio{
 
 	private  String nombreCarta; //es una busqueda asi que podra ser un fragmento del nombre y slair muchos resultados
+	private String expansion; // la api no deja buscar por expansion asi que sera filtrada despues si va a null se ignora
 	private  Integer idioma;
 	private Integer juego;
 
@@ -15,6 +16,14 @@ public class InputBuscarArticulo extends InputServicioNegocio{
 
 	public void setNombreCarta(String nombreCarta) {
 		this.nombreCarta = nombreCarta;
+	}
+	
+	public String getExpansion() {
+		return expansion;
+	}
+
+	public void setExpansion(String expansion) {
+		this.expansion = expansion;
 	}
 
 	public Integer getIdioma() {

@@ -22,6 +22,7 @@ public abstract class ServicioNegocio {
      * Método que ejecuta la lógica del servicio de negocio.
      *
      * @return resultado de salida (un objeto TO.OUT)
+	 * @throws Exception 
      */
 	protected abstract OutputServicioNegocio llamadaServicio();
 
@@ -53,7 +54,12 @@ public abstract class ServicioNegocio {
 					idServicio + " Se procede con el Rollback de la llamada");
 
 			log.log(Level.SEVERE, "Detalles del error: "+ error.getMessage() +
-					"////Causa: " + error.getCause());
+					"////Causa: " );
+			
+			for(Object item: error.getStackTrace()) {
+				log.log(Level.SEVERE, item.toString());
+			}
+			
 
 			//TODO rollback base de datos
 			//devolvemos el error
