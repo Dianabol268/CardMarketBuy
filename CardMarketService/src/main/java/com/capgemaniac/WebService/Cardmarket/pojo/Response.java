@@ -135,7 +135,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Response {
 
     protected List<Response.Product> product;
-
+    protected List<Request.Article> article;
     /**
      * Gets the value of the product property.
      * 
@@ -163,6 +163,13 @@ public class Response {
             product = new ArrayList<Response.Product>();
         }
         return this.product;
+    }
+
+    public List<Request.Article> getArticle() {
+        if (article == null) {
+            article = new ArrayList<Request.Article>();
+        }
+        return this.article;
     }
 
 
