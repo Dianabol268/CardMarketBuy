@@ -19,6 +19,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import com.capgemaniac.util.Constants;
 import com.capgemaniac.util.Utilidades;
 
 /**
@@ -45,10 +46,10 @@ public class WebServiceCall {
 
         */
        public WebServiceCall(Logger log) {
-           mkmAppToken = WebServiceProperties.mkmAppToken;
-           mkmAppSecret = WebServiceProperties.mkmAppSecret;
-           mkmAccessToken = WebServiceProperties.mkmAccessToken;
-           mkmAccessTokenSecret = WebServiceProperties.mkmAccessTokenSecret;
+           mkmAppToken = Constants.mkmAppToken;
+           mkmAppSecret = Constants.mkmAppSecret;
+           mkmAccessToken = Constants.mkmAccessToken;
+           mkmAccessTokenSecret = Constants.mkmAccessTokenSecret;
            this.log= log;
            lastError = null;
        }

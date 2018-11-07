@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.capgemaniac.WebService.Cardmarket.Arquitectura.WebServiceCall;
-import com.capgemaniac.WebService.Cardmarket.Arquitectura.WebServiceProperties;
 import com.capgemaniac.WebService.Cardmarket.pojo.Request.Article;
 import com.capgemaniac.WebService.Cardmarket.pojo.Response;
 import com.capgemaniac.WebService.Cardmarket.pojo.Response.Product;
+import com.capgemaniac.util.Constants;
 import com.capgemaniac.util.Utilidades;
 
 public class WSObtenerInformacionCartas {
@@ -27,7 +27,7 @@ public class WSObtenerInformacionCartas {
 
 		 WebServiceCall app = new WebServiceCall(log);
 		 StringBuilder str = new StringBuilder();
-		 str.append(WebServiceProperties.URLCARDMARKET+ "products/find?search=");
+		 str.append(Constants.URLCARDMARKET+ "products/find?search=");
 		 str.append(carta);
 		 str.append("&");
 		 str.append("idGame=" + juego);
@@ -61,7 +61,7 @@ public class WSObtenerInformacionCartas {
 	public static List<Product> buscarCarta(String carta, int juego, int idioma,  Logger log) {
 		WebServiceCall app = new WebServiceCall(log);
 		 StringBuilder str = new StringBuilder();
-		 str.append(WebServiceProperties.URLCARDMARKET+ "products/find?search=");
+		 str.append(Constants.URLCARDMARKET+ "products/find?search=");
 		 str.append(carta);
 		 str.append("&");
 		 str.append("idGame=" + juego);
@@ -92,7 +92,7 @@ public class WSObtenerInformacionCartas {
 	public static Product obtenerCarta(Integer id,  Logger log) {
 		 WebServiceCall app = new WebServiceCall(log);
 		 StringBuilder str = new StringBuilder();
-		 str.append(WebServiceProperties.URLCARDMARKET+"product/");
+		 str.append(Constants.URLCARDMARKET+"product/");
 		 str.append(id);
 
 		  if (app.requestMKMGet(str.toString())) {
