@@ -17,13 +17,13 @@ public class SNBuscarArticulo extends ServicioNegocio{
 
 	@Override
 	protected OutputServicioNegocio llamadaServicio() {
-		Utilidades.escribirLogInfo("Inicio- SNBuscarArticulo", log);
+		Utilidades.escribirLogInfo("Inicio- SNBuscarArticulo");
 		InputBuscarArticulo entrada = (InputBuscarArticulo) this.getEntradaServicio();
 
 		OutputBuscarArticulo salida = new OutputBuscarArticulo();
-		salida.setListaProductos(WSObtenerInformacionCartas.buscarCarta(entrada.getNombreCarta(), entrada.getJuego(), entrada.getIdioma(), log));
+		salida.setListaProductos(WSObtenerInformacionCartas.buscarCarta(entrada.getNombreCarta(), entrada.getJuego(), entrada.getIdioma()));
 		salida.setListaProductos(filtrarPorExpansion(salida, entrada.getExpansion())); 
-		Utilidades.escribirLogInfo("Final- SNBuscarArticulo", log);
+		Utilidades.escribirLogInfo("Final- SNBuscarArticulo");
 		return salida;
 	}
 

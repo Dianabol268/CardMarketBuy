@@ -11,12 +11,12 @@ import com.capgemaniac.util.Constants;
 
 public class WSAgregarArticulosCuenta {
 
-	public void ponerArticulosVenta(Article carta, Logger log) {
+	public void ponerArticulosVenta(Article carta) {
 
 		Request request = new Request();
 		request.setArticle(carta);
 
-		 WebServiceCall app = new WebServiceCall(log);
+		 WebServiceCall app = new WebServiceCall();
 		 StringBuilder str = new StringBuilder();
 		 str.append(Constants.URLCARDMARKET+ "stock");
 		  if (app.requestMKMPost(str.toString(), request)) {

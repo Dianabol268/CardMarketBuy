@@ -31,7 +31,7 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 	 */
 	public OutputServicioNegocio llamadaServicio() {
 
-		Utilidades.escribirLogInfo("Inicio- SNObtenerPrecioColeccion", log);
+		Utilidades.escribirLogInfo("Inicio- SNObtenerPrecioColeccion");
 		//primero inicializamos el objeto de entrada de arquitectura, con el cast Necesario
 		InputObtenerPrecioColeccion entrada = (InputObtenerPrecioColeccion) this.getEntradaServicio();
 		int juego= entrada.getIdJuego();
@@ -52,10 +52,11 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 			Product producto=null;
 			//si trae Id buscamos por el, en caso contrario por nombre
 			if(!Utilidades.isNull(id)) {
-				producto = WSObtenerInformacionCartas.obtenerCarta(id, log);
+				producto = WSObtenerInformacionCartas.obtenerCarta(id);
 			}
 			else if(!Utilidades.isNull(nombre)){
-				producto = WSObtenerInformacionCartas.obtenerCarta(nombre, juego, idioma, expansion, log);
+				//TODO revisar el metodo usado no esta bien 
+				//producto = WSObtenerInformacionCartas.obtenerCarta(nombre, juego, idioma, expansion, log);
 			}
 
 			BigDecimal precio=obtenerPrecioMinimoProducto(producto, foil);
@@ -69,14 +70,14 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 			}
 		}
 
-		Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- PrecioTotal  " + precioAcumulado + " euros", log);
+		Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- PrecioTotal  " + precioAcumulado + " euros");
 
 		OutputObtenerPrecioColeccion salida= new OutputObtenerPrecioColeccion();
 		salida.setListadoCartasEncontradas(cartaEncontradas);
 		//solo aplica para cuando busquemos por nombre
 		salida.setListadoCartasNoEncontradas(cartaNoEncontradas);
 		salida.setPrecioColeccion(precioAcumulado);
-		Utilidades.escribirLogInfo("Final- SNObtenerPrecioColeccion", log);
+		Utilidades.escribirLogInfo("Final- SNObtenerPrecioColeccion");
 		return salida;
 
 	}
@@ -92,12 +93,12 @@ public class SNObtenerPrecioColeccion extends ServicioNegocio{
 		if(!Utilidades.isNull(producto)) {
 			if(esFoil) {
 				Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- Precio FOIL carta: "+ producto.getEnName() + " - "
-						  + producto.getPriceGuide().getLOWFOIL() + " euros", log);
+						  + producto.getPriceGuide().getLOWFOIL() + " euros");
 				  return Utilidades.getBigDecimalFromFloat(producto.getPriceGuide().getLOWFOIL());
 			  }
 			  else {
 				  Utilidades.escribirLogInfo("In- SNObtenerPrecioColeccion- Precio carta: "+ producto.getEnName() + " - "
-						  + producto.getPriceGuide().getLOW() + " euros", log);
+						  + producto.getPriceGuide().getLOW() + " euros");
 				  return Utilidades.getBigDecimalFromFloat(producto.getPriceGuide().getLOW());
 			  }
 		}

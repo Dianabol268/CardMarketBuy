@@ -14,13 +14,13 @@ public class WSObtenerStock {
 
 	public static List<Article> getStock(){
 		
-		 WebServiceCall app = new WebServiceCall(ServicioNegocio.log);
+		 WebServiceCall app = new WebServiceCall();
 		 StringBuilder str = new StringBuilder();
 		 str.append(Constants.URLCARDMARKET+ "stock");
 		 Response salidaWebService = new Response();
 		 List<Article> listaArticulos = new ArrayList<Article>();
 		  if (app.requestMKMGet(str.toString())) { 
-			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService, ServicioNegocio.log);
+			  salidaWebService =  (Response) Utilidades.unMarshall(app.responseContent(), salidaWebService);
 			  listaArticulos= salidaWebService.getArticle();
 		  }
 		  	

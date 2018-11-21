@@ -19,6 +19,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import com.capgemaniac.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaniac.util.Constants;
 import com.capgemaniac.util.Utilidades;
 
@@ -38,19 +39,17 @@ public class WebServiceCall {
        private int lastCode;
        private StringBuffer lastContent;
        private boolean debugDE;
-       Logger log;
 
        /**
         * Constructor.
      * @param log
 
         */
-       public WebServiceCall(Logger log) {
+       public WebServiceCall() {
            mkmAppToken = Constants.mkmAppToken;
            mkmAppSecret = Constants.mkmAppSecret;
            mkmAccessToken = Constants.mkmAccessToken;
            mkmAccessTokenSecret = Constants.mkmAccessTokenSecret;
-           this.log= log;
            lastError = null;
        }
 
@@ -213,7 +212,7 @@ public class WebServiceCall {
            return authorizationProperty;
     	   }
     	   catch (Exception e) {
-        	   log.log(Level.SEVERE,"(!) Error while requesting obtenerSignature:" +requestURL);
+        	   ServicioNegocio.log.log(Level.SEVERE,"(!) Error while requesting obtenerSignature:" +requestURL);
                lastError = e;
            }
     	   return "";
@@ -233,7 +232,7 @@ public class WebServiceCall {
            lastContent = new StringBuffer();
            HttpURLConnection connection=null;
            try {
-        	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
+        	   Utilidades.escribirLogInfo("Requesting "+requestURL);
 
                connection = (HttpURLConnection) new URL(requestURL).openConnection();
                connection.addRequestProperty("Authorization", generateOAuthSignature2(requestURL, "GET")) ;
@@ -246,7 +245,7 @@ public class WebServiceCall {
                lastCode = connection.getResponseCode();
 
 
-               Utilidades.escribirLogInfo("Response Code is \""+lastCode, log);
+               Utilidades.escribirLogInfo("Response Code is \""+lastCode);
 
                if (200 == lastCode || 401 == lastCode || 404 == lastCode) {
                    BufferedReader rd = new BufferedReader(new InputStreamReader(lastCode==200?connection.getInputStream():connection.getErrorStream()));
@@ -257,13 +256,13 @@ public class WebServiceCall {
                    }
                    rd.close();
                    lastContent = sb;
-                   Utilidades.escribirLogInfo("Response Content is \n"+lastContent, log);
+                   Utilidades.escribirLogInfo("Response Content is \n"+lastContent);
                }
 
                return (lastCode == 200);
 
            } catch (Exception e) {
-        	   log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
+        	   ServicioNegocio.log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
                lastError = e;
            }
            finally {
@@ -287,7 +286,7 @@ public class WebServiceCall {
            HttpURLConnection connection = null;
 
            try {
-        	   Utilidades.escribirLogInfo("Requesting "+requestURL, log);
+        	   Utilidades.escribirLogInfo("Requesting "+requestURL);
 
                 connection = (HttpURLConnection) new URL(requestURL).openConnection();
                connection.addRequestProperty("Authorization", this.generateOAuthSignature2(requestURL, "POST")) ;
@@ -296,7 +295,7 @@ public class WebServiceCall {
                connection.connect();
                //le metemos en un Stream el objeto xml en UTF-8
                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
-               writer.write(Utilidades.marshall(objetoPost, log));
+               writer.write(Utilidades.marshall(objetoPost));
                writer.close();
 
                // from here standard actions...
@@ -304,7 +303,7 @@ public class WebServiceCall {
 
                lastCode = connection.getResponseCode();
 
-               Utilidades.escribirLogInfo("Response Code is \""+lastCode, log);
+               Utilidades.escribirLogInfo("Response Code is \""+lastCode);
 
                if (200 == lastCode || 404 == lastCode) {
                    BufferedReader rd = new BufferedReader(new InputStreamReader(lastCode==200?connection.getInputStream():connection.getErrorStream()));
@@ -315,13 +314,13 @@ public class WebServiceCall {
                    }
                    rd.close();
                    lastContent = sb;
-                   Utilidades.escribirLogInfo("Response Content is \n"+lastContent, log);
+                   Utilidades.escribirLogInfo("Response Content is \n"+lastContent);
                }
 
                return (lastCode == 200);
 
            } catch (Exception e) {
-        	   log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
+        	   ServicioNegocio.log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
                lastError = e;
            }
            finally {

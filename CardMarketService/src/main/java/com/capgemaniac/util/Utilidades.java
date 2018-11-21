@@ -9,6 +9,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.capgemaniac.ServiciosNegocio.Arquitectura.ServicioNegocio;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -35,9 +37,9 @@ public final class Utilidades {
 	 *
 	 * metodo que escribira en el log dependiendo de si estan activados o no TODO el si estan activados o no
 	 */
-	public static void escribirLogInfo(String info, Logger log) {
-		if (log!=null){
-			log.info(info);
+	public static void escribirLogInfo(String info) {
+		if (ServicioNegocio.log!=null){
+			ServicioNegocio.log.info(info);
 		}
 
 	}
@@ -70,7 +72,7 @@ public final class Utilidades {
 	/**
 	 *  Metodo que realiza la conversion de un objeto Java a un String
 	 */
-	public static String marshall(Object objeto, Logger log) {
+	public static String marshall(Object objeto) {
 
 		  JAXBContext jaxbContext;
 		try {
@@ -83,7 +85,7 @@ public final class Utilidades {
 		}
 
          catch (JAXBException error) {
-        	 log.log(Level.SEVERE, "Error haciendo el marshall a xml: Detalles del error: "+ error.getMessage() +
+        	 ServicioNegocio.log.log(Level.SEVERE, "Error haciendo el marshall a xml: Detalles del error: "+ error.getMessage() +
 						"////Causa: " + error.getCause());
  		}
 		return null;
@@ -94,7 +96,7 @@ public final class Utilidades {
 	 * @param <JAXBContext>
 	 */
 
-	public static Object unMarshall(StringBuffer stringBuffer, Object objeto, Logger log) {
+	public static Object unMarshall(StringBuffer stringBuffer, Object objeto) {
 		if(stringBuffer != null && objeto!=null){
 			   try {
 				   JAXBContext jaxbContext = JAXBContext.newInstance(objeto.getClass());
@@ -102,7 +104,7 @@ public final class Utilidades {
 				   objeto = (Object) jaxbUnmarshaller.unmarshal(new StringReader(stringBuffer.toString()));
 				   //no deberia darse
 			} catch (JAXBException error) {
-				log.log(Level.SEVERE, "Error haciendo el Unmarshall del xml: Detalles del error: "+ error.getMessage() +
+				ServicioNegocio.log.log(Level.SEVERE, "Error haciendo el Unmarshall del xml: Detalles del error: "+ error.getMessage() +
 						"////Causa: " + error.getCause());
 			}
 		}

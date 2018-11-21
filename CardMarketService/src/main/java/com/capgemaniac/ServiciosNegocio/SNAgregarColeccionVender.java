@@ -15,7 +15,7 @@ public class SNAgregarColeccionVender extends ServicioNegocio{
 
 	@Override
 	protected OutputServicioNegocio llamadaServicio() {
-		Utilidades.escribirLogInfo("Inicio- SNAgregarCartaVender", log);
+		Utilidades.escribirLogInfo("Inicio- SNAgregarCartaVender");
 		InputAgregarColeccionVender entrada = (InputAgregarColeccionVender) this.getEntradaServicio();
 		//creamos las listas que tendremos que devolver
 		List<Article> cartasAgregadas = new ArrayList<Article>();
@@ -26,17 +26,17 @@ public class SNAgregarColeccionVender extends ServicioNegocio{
 		for(Article cartaAInsertar:entrada.getListaCartas()) {
 			//primero quitamos las que no pasen la validacion
 			if(!validarInfo(cartaAInsertar)) {
-				Utilidades.escribirLogInfo("carta No agregada-no ha superado la validación: " + cartaAInsertar.getIdProduct(), log);
+				Utilidades.escribirLogInfo("carta No agregada-no ha superado la validación: " + cartaAInsertar.getIdProduct());
 				cartasNoAgregadas.add(cartaAInsertar);
 			}
 			else {
-				llamadaWS.ponerArticulosVenta(cartaAInsertar, log);
+				llamadaWS.ponerArticulosVenta(cartaAInsertar);
 				cartasAgregadas.add(cartaAInsertar);
 			}
 		}
 
 
-		Utilidades.escribirLogInfo("Final- SNAgregarCartaVender", log);
+		Utilidades.escribirLogInfo("Final- SNAgregarCartaVender");
 		return null;
 	}
 
