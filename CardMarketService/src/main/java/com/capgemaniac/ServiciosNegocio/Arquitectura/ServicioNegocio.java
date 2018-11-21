@@ -5,6 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import com.capgemaniac.util.Utilidades;
+
 //implementamos una llamada gen�rica para todos los Servicios
 	//cada Servicio de negocio tiene que tener un objeto de entrada propio. o usar uno generico
 	// la nomenclatura ser�: Input.... para el objeto y SN... para el servicio
@@ -50,14 +52,14 @@ public abstract class ServicioNegocio {
 			 salida= llamadaServicio();
 		}
 		catch(Exception error) {
-			log.log(Level.SEVERE, "Se ha producido un error en la invocacion del servicio Id: " +
+			Utilidades.escribirLogError("Se ha producido un error en la invocacion del servicio Id: " +
 					idServicio + " Se procede con el Rollback de la llamada");
-
-			log.log(Level.SEVERE, "Detalles del error: "+ error.getMessage() +
-					"////Causa: " );
+			
+			Utilidades.escribirLogError("Detalles del error: "+ error.getMessage() +
+					"////Causa: ");
 			
 			for(Object item: error.getStackTrace()) {
-				log.log(Level.SEVERE, item.toString());
+				Utilidades.escribirLogError(item.toString());
 			}
 			
 

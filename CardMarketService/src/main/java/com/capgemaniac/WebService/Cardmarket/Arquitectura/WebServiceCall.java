@@ -12,14 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import com.capgemaniac.ServiciosNegocio.Arquitectura.ServicioNegocio;
 import com.capgemaniac.util.Constants;
 import com.capgemaniac.util.Utilidades;
 
@@ -212,7 +209,7 @@ public class WebServiceCall {
            return authorizationProperty;
     	   }
     	   catch (Exception e) {
-        	   ServicioNegocio.log.log(Level.SEVERE,"(!) Error while requesting obtenerSignature:" +requestURL);
+        	   Utilidades.escribirLogError("(!) Error while requesting obtenerSignature:" +requestURL);
                lastError = e;
            }
     	   return "";
@@ -262,7 +259,7 @@ public class WebServiceCall {
                return (lastCode == 200);
 
            } catch (Exception e) {
-        	   ServicioNegocio.log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
+        	   Utilidades.escribirLogError("(!) Error while requesting :" +requestURL);
                lastError = e;
            }
            finally {
@@ -320,7 +317,7 @@ public class WebServiceCall {
                return (lastCode == 200);
 
            } catch (Exception e) {
-        	   ServicioNegocio.log.log(Level.SEVERE,"(!) Error while requesting :" +requestURL);
+        	   Utilidades.escribirLogError("(!) Error while requesting :" +requestURL);
                lastError = e;
            }
            finally {

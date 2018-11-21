@@ -32,7 +32,20 @@ public final class Utilidades {
 	        }
 	        return builder.toString();
 	    }
+	
+	 
+	 
+	 /**
+	 *
+	 * metodo que escribira en el log dependiendo de si estan activados o no TODO el si estan activados o no
+	 */
+	public static void escribirLogError(String info) {
+		if (ServicioNegocio.log!=null){
+			ServicioNegocio.log.log(Level.SEVERE, info);
+		}
 
+	}
+	
 	/**
 	 *
 	 * metodo que escribira en el log dependiendo de si estan activados o no TODO el si estan activados o no
@@ -85,7 +98,7 @@ public final class Utilidades {
 		}
 
          catch (JAXBException error) {
-        	 ServicioNegocio.log.log(Level.SEVERE, "Error haciendo el marshall a xml: Detalles del error: "+ error.getMessage() +
+        	 Utilidades.escribirLogError("Error haciendo el marshall a xml: Detalles del error: "+ error.getMessage() +
 						"////Causa: " + error.getCause());
  		}
 		return null;
@@ -104,8 +117,8 @@ public final class Utilidades {
 				   objeto = (Object) jaxbUnmarshaller.unmarshal(new StringReader(stringBuffer.toString()));
 				   //no deberia darse
 			} catch (JAXBException error) {
-				ServicioNegocio.log.log(Level.SEVERE, "Error haciendo el Unmarshall del xml: Detalles del error: "+ error.getMessage() +
-						"////Causa: " + error.getCause());
+				 Utilidades.escribirLogError("Error haciendo el Unmarshall del xml: Detalles del error: "+ error.getMessage() +
+							"////Causa: " + error.getCause());	
 			}
 		}
 		return objeto;
